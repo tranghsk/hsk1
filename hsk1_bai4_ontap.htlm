@@ -1,0 +1,1814 @@
+<html lang="vi"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK1 - Bài 4: 我有两个孩子 - Ôn tập tương tác</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=Quicksand:wght@600;700&amp;family=Noto+Sans+SC:wght@500;700;900&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D98A80;
+    --red-dark:#B35D52;
+    --red-light:#F0B8AE;
+    --accent:#E0A85C;
+    --accent-dark:#BD8636;
+    --accent-light:#F3D9A8;
+    --cream:#FBF7F1;
+    --cream-2:#F3EBDD;
+    --white:#FFFFFF;
+    --ink:#2A2622;
+    --gray:#8A8577;
+    --green:#4FAE82;
+    --green-bg:#DCF5E9;
+    --error:#C0392B;
+    --error-bg:#fbe6e3;
+    --red-bg:#fdecdf;
+    --gold:#E8B86B;
+    --gold-dark:#C4913F;
+    --purple:#9B85C9;
+    --shadow: 0 4px 14px rgba(185,133,120,0.14);
+    --shadow-pop: 0 10px 26px rgba(185,133,120,0.24);
+    --radius: 16px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Be Vietnam Pro',sans-serif;
+    background:
+      radial-gradient(circle at 8% 12%, #def5ea 0%, transparent 40%),
+      radial-gradient(circle at 95% 0%, #f8dad5 0%, transparent 35%),
+      radial-gradient(circle at 90% 90%, #f6e4c0 0%, transparent 40%),
+      radial-gradient(circle at 50% 100%, #e6def2 0%, transparent 45%),
+      var(--cream);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  h1,h2,h3,.font-title{font-family:'Baloo 2',sans-serif;}
+  .hanzi{font-family:'Noto Sans SC','Microsoft YaHei','PingFang SC','SimHei',sans-serif;}
+  ::selection{background:var(--gold);color:#fff;}
+
+  .app{display:flex;min-height:100vh;}
+
+  /* XP / gamification bar */
+  .xp-box{
+    background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);
+    color:#fff;border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);
+  }
+  .xp-box .lvl-row{display:flex;justify-content:space-between;align-items:center;font-family:'Baloo 2';font-size:.85rem;margin-bottom:6px;}
+  .xp-bar-bg{width:100%;height:10px;border-radius:8px;background:rgba(255,255,255,.25);overflow:hidden;}
+  .xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),#ffd76b);border-radius:8px;transition:width .5s ease;width:0%;}
+  .streak-row{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:.8rem;}
+  .streak-flame{font-size:1.1rem;}
+
+  /* Main */
+  .main{flex:1;padding:26px 34px;max-width:1050px;}
+  .topbar{
+    text-align:center;background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);
+    color:#fff;border-radius:var(--radius);padding:26px 24px 22px;margin-bottom:18px;
+    box-shadow:var(--shadow-pop);
+  }
+  .topbar-brand{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:.85rem;opacity:.85;margin-bottom:6px;}
+  .topbar h2{margin:0;color:#fff;font-size:1.8rem;}
+  .topbar .desc{color:rgba(255,255,255,.85);font-size:.88rem;margin-top:8px;}
+  .topbar-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .badge-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
+  .badge-pill{
+    font-family:'Baloo 2';font-size:.78rem;background:#fff;border:2px solid var(--cream-2);
+    color:var(--gray);padding:4px 12px;border-radius:999px;transition:.2s;
+  }
+  .badge-pill.earned{background:linear-gradient(135deg,var(--gold),#ffcf6b);border-color:var(--gold-dark);color:#7a4d05;box-shadow:0 3px 8px rgba(240,169,58,.4);}
+
+  .tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+  .tab-btn{
+    font-family:'Baloo 2',sans-serif;font-weight:700;
+    background:var(--white);border:2px solid var(--cream-2);color:var(--red-dark);
+    padding:10px 20px;border-radius:999px;cursor:pointer;font-size:.95rem;transition:.18s;
+    box-shadow:0 2px 6px rgba(47,122,92,.08);
+  }
+  .tab-btn.active{background:linear-gradient(135deg,var(--red),var(--red-light));color:#fff;border-color:var(--red);transform:translateY(-2px);box-shadow:var(--shadow-pop);}
+  .tab-btn:hover:not(.active){border-color:var(--red-light);transform:translateY(-1px);}
+
+  .panel{display:none;animation:fade .3s;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.06);}100%{transform:scale(1);}}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+  @keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.6);}20%{opacity:1;transform:translateY(-10px) scale(1.1);}100%{opacity:0;transform:translateY(-46px) scale(1);}}
+
+  .card{
+    background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:20px;margin-bottom:18px;border:2px solid transparent;transition:.2s;
+  }
+  .card:hover{box-shadow:var(--shadow-pop);}
+
+  /* Bài khoá / hội thoại */
+  .dialogue-group{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;}
+  .dialogue-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+  .dialogue-title{font-family:'Baloo 2',sans-serif;color:var(--red-dark);font-size:1.05rem;}
+  .dlg-line{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;}
+  .dlg-line:last-child{margin-bottom:0;}
+  .dlg-avatar-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:58px;}
+  .dlg-avatar{
+    width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;background:var(--cream-2);border:3px solid var(--red-light);box-shadow:var(--shadow);
+  }
+  .dlg-who{text-align:center;font-size:.66rem;color:var(--gray);margin-top:4px;line-height:1.2;}
+  .dlg-who .hz-mini{font-size:.72rem;font-weight:700;color:var(--red-dark);}
+  .dlg-bubble{
+    position:relative;background:#fff;border:2px solid var(--red);border-radius:14px;
+    padding:10px 40px 10px 16px;flex:1;box-shadow:0 2px 6px rgba(0,0,0,.06);min-width:0;
+  }
+  .dlg-bubble::before{content:'';position:absolute;left:-10px;top:16px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:10px solid var(--red);}
+  .dlg-bubble::after{content:'';position:absolute;left:-7px;top:16px;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:8px solid #fff;}
+  .dlg-py{font-size:.85rem;color:var(--accent-dark);font-weight:700;margin-bottom:3px;letter-spacing:.2px;}
+  .dlg-hz{font-size:1.5rem;font-weight:700;line-height:1.3;}
+  .dlg-bubble .btn-speak{position:absolute;top:8px;right:8px;width:30px;height:30px;font-size:.85rem;}
+  .btn-play-all{margin-left:auto;}
+
+
+  /* Mục tiêu bài học */
+  .goals-card{
+    background:var(--white);border:2px solid var(--red-light);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 22px;margin-bottom:18px;
+  }
+  .goals-head{
+    font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--red);font-size:1.1rem;
+    display:flex;align-items:center;gap:6px;margin-bottom:14px;
+  }
+  .goal-item{
+    display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;cursor:pointer;
+    font-size:.92rem;line-height:1.6;color:var(--ink);
+  }
+  .goal-item:last-child{margin-bottom:0;}
+  .goal-item input[type="checkbox"]{
+    appearance:none;-webkit-appearance:none;flex-shrink:0;width:20px;height:20px;margin-top:2px;
+    border:2px solid var(--red);border-radius:5px;cursor:pointer;position:relative;background:#fff;
+  }
+  .goal-item input[type="checkbox"]:checked{background:var(--red);}
+  .goal-item input[type="checkbox"]:checked::after{
+    content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:.85rem;font-weight:700;
+  }
+  .goal-item .hanzi{color:var(--red-dark);font-weight:700;margin-right:4px;}
+
+  table.vocab{width:100%;border-collapse:collapse;}
+  table.vocab th{
+    text-align:left;font-family:'Baloo 2',sans-serif;background:var(--cream-2);color:var(--red-dark);
+    padding:10px;font-size:.85rem;
+  }
+  table.vocab.hide-py td.pinyin{visibility:hidden;}
+  #dialogue-container.hide-py .dlg-py{visibility:hidden;}
+  table.vocab td{padding:10px;border-bottom:1px solid var(--cream-2);vertical-align:middle;font-size:.92rem;}
+  table.vocab tr{transition:.15s;}
+  table.vocab tr:hover{background:#fdf3ef;transform:scale(1.005);}
+  .hz{font-size:1.4rem;font-weight:700;}
+  table.vocab .hz{font-size:2.1rem;color:var(--red-dark);letter-spacing:.5px;}
+  table.vocab td:nth-child(2){width:1%;white-space:nowrap;}
+  .pinyin{color:var(--accent-dark);font-weight:700;}
+  .pos{display:inline-block;background:var(--cream-2);color:var(--gray);font-size:.7rem;padding:2px 8px;border-radius:8px;}
+  .btn-speak{
+    border:none;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;width:34px;height:34px;border-radius:50%;
+    cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;transition:.15s;
+    box-shadow:0 2px 6px rgba(193,80,63,.35);
+  }
+  .btn-speak:hover{transform:scale(1.15) rotate(-6deg);}
+  .btn-speak:active{transform:scale(.92);}
+
+  /* Flashcards */
+  .fc-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;position:relative;}
+  .fc-progress{color:var(--gray);font-size:.85rem;font-family:'Baloo 2';}
+  .fc-stars{font-size:.85rem;color:var(--gold-dark);}
+  .flashcard{
+    width:320px;height:220px;perspective:1200px;cursor:pointer;
+  }
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+  .flashcard.flipped .fc-inner{transform:rotateY(180deg);}
+  .fc-face{
+    position:absolute;inset:0;border-radius:20px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;backface-visibility:hidden;
+    box-shadow:var(--shadow-pop);padding:14px;text-align:center;
+  }
+  .fc-front{background:linear-gradient(150deg,var(--red) 0%,var(--red-light) 60%,var(--accent-light) 100%);color:#fff;}
+  .fc-front .hz{font-size:2.6rem;text-shadow:0 3px 8px rgba(0,0,0,.2);}
+  .fc-front .hint{position:absolute;bottom:14px;font-size:.72rem;opacity:.75;}
+  .fc-back{background:var(--white);transform:rotateY(180deg);border:3px solid var(--gold);}
+  .fc-back .pinyin{font-size:1.35rem;}
+  .fc-back .mean{margin-top:6px;font-size:1.05rem;}
+  .fc-controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .btn{
+    font-family:'Baloo 2',sans-serif;font-weight:700;border:none;border-radius:12px;
+    padding:10px 20px;cursor:pointer;font-size:.9rem;background:linear-gradient(135deg,var(--red),var(--red-light));
+    color:#fff;box-shadow:0 3px 0 var(--red-dark);transition:.12s;
+  }
+  .btn.secondary{background:var(--cream-2);color:var(--red-dark);box-shadow:0 3px 0 #d8c3a5;}
+  .btn.gold{background:linear-gradient(135deg,var(--gold),#ffcf6b);color:#7a4d05;box-shadow:0 3px 0 var(--gold-dark);}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+  .btn:active{transform:translateY(2px);box-shadow:none;}
+
+  /* Exercises */
+  .ex-block{margin-bottom:26px;}
+  .ex-title{font-family:'Baloo 2',sans-serif;color:var(--red);font-size:1.05rem;margin-bottom:4px;}
+  .ex-sub{color:var(--gray);font-size:.82rem;margin-bottom:12px;}
+  .fill-line{margin-bottom:12px;font-size:1rem;line-height:1.8;}
+  select.blank{
+    font-family:'Be Vietnam Pro';font-size:.95rem;padding:5px 10px;border:2px solid var(--red-light);
+    border-radius:10px;background:#fff;color:var(--red-dark);font-weight:700;cursor:pointer;
+  }
+  select.blank.ok{border-color:var(--green);background:var(--green-bg);animation:pop .3s;}
+  select.blank.bad{border-color:var(--error);background:var(--error-bg);animation:shake .3s;}
+  .order-item{
+    display:inline-block;background:linear-gradient(135deg,#fff,var(--cream-2));border:2px solid #e9d7bd;
+    padding:7px 14px;margin:4px;border-radius:10px;cursor:pointer;font-size:1.15rem;user-select:none;
+    box-shadow:0 2px 4px rgba(0,0,0,.06);transition:.12s;
+  }
+  .order-item:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,.1);}
+  .order-item.chosen{background:linear-gradient(135deg,var(--red),var(--red-light));color:#fff;border-color:var(--red-dark);}
+  .order-zone{min-height:50px;border:2px dashed var(--red-light);border-radius:12px;padding:8px;margin-bottom:8px;background:#fffaf3;transition:.2s;}
+  .order-zone.ok{border-style:solid;border-color:var(--green);background:var(--green-bg);animation:pop .35s;}
+  .order-zone.bad{border-style:solid;border-color:var(--error);background:var(--error-bg);animation:shake .35s;}
+  .order-bank{min-height:50px;border-radius:12px;padding:8px;margin-bottom:8px;}
+  textarea.ans{
+    width:100%;min-height:56px;border:2px solid var(--cream-2);border-radius:12px;padding:10px;
+    font-family:'Be Vietnam Pro';font-size:.95rem;resize:vertical;transition:.15s;
+  }
+  textarea.ans:focus{outline:none;border-color:var(--red-light);box-shadow:0 0 0 3px rgba(47,122,92,.15);}
+  .reveal-box{
+    margin-top:8px;background:var(--green-bg);border-left:4px solid var(--green);padding:10px 14px;
+    border-radius:10px;display:none;font-size:.92rem;
+  }
+  .reveal-box.show{display:block;animation:fade .3s;}
+  .self-grade{display:none;gap:6px;margin-top:6px;}
+  .self-grade.show{display:inline-flex;}
+  .btn-mini{
+    font-family:'Baloo 2';font-weight:700;border:none;border-radius:8px;padding:5px 12px;
+    cursor:pointer;font-size:.8rem;
+  }
+  .btn-mini.yes{background:var(--green-bg);color:var(--green);}
+  .btn-mini.no{background:var(--error-bg);color:var(--error);}
+  .btn-check{margin-right:8px;}
+  .result-ok{color:var(--green);font-weight:700;}
+  .result-bad{color:var(--error);font-weight:700;}
+  .score-box{
+    background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;padding:10px 18px;border-radius:14px;
+    font-family:'Baloo 2';font-weight:700;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;
+    box-shadow:0 10px 26px rgba(193,80,63,.25);
+  }
+  .score-box .star{color:var(--gold);}
+
+  /* Nghe - trắc nghiệm */
+  .listen-item{margin-bottom:20px;padding-bottom:18px;border-bottom:1px dashed var(--cream-2);}
+  .listen-item:last-child{border-bottom:none;margin-bottom:0;}
+  .listen-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .listen-num{font-family:'Baloo 2';font-weight:700;color:var(--red-dark);font-size:.95rem;}
+  .btn-listen{
+    border:none;background:linear-gradient(135deg,var(--red),var(--red-light));color:#fff;
+    width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:1.15rem;
+    display:inline-flex;align-items:center;justify-content:center;transition:.15s;
+    box-shadow:0 3px 8px rgba(185,133,120,.35);flex-shrink:0;
+  }
+  .btn-listen:hover{transform:scale(1.1);}
+  .btn-listen:active{transform:scale(.92);}
+  .mc-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;}
+  .mc-opt{
+    font-family:'Be Vietnam Pro';background:#fff;border:2px solid var(--cream-2);border-radius:12px;
+    padding:12px 10px;cursor:pointer;text-align:center;transition:.15s;font-size:1.3rem;
+  }
+  .mc-opt:hover:not(:disabled){border-color:var(--red-light);transform:translateY(-2px);}
+  .mc-opt:disabled{cursor:default;}
+  .mc-opt.ok{border-color:var(--green);background:var(--green-bg);color:var(--green);animation:pop .3s;}
+  .mc-opt.bad{border-color:var(--error);background:var(--error-bg);color:var(--error);animation:shake .3s;}
+  .mc-opt.dim{opacity:.5;}
+  .mc-opt .mc-py{display:block;font-size:.72rem;color:var(--gray);font-weight:400;margin-top:2px;}
+
+  /* Hanzi tab */
+  .hz-picker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .hz-chip{
+    font-size:1.3rem;padding:6px 14px;border-radius:10px;background:var(--cream-2);
+    cursor:pointer;border:2px solid transparent;
+  }
+  .hz-chip.active{background:var(--red);color:#fff;}
+  .hz-stage{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;}
+  #hanzi-target{
+    background-color:#fff;border-radius:14px;box-shadow:var(--shadow);
+    border:2px solid var(--red-light);overflow:hidden;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cline x1='100' y1='0' x2='100' y2='200' stroke='%23F0B8AE' stroke-width='1.5' stroke-dasharray='6,6'/%3E%3Cline x1='0' y1='100' x2='200' y2='100' stroke='%23F0B8AE' stroke-width='1.5' stroke-dasharray='6,6'/%3E%3Cline x1='0' y1='0' x2='200' y2='200' stroke='%23F0B8AE' stroke-width='1' stroke-dasharray='4,5'/%3E%3Cline x1='200' y1='0' x2='0' y2='200' stroke='%23F0B8AE' stroke-width='1' stroke-dasharray='4,5'/%3E%3C/svg%3E");
+    background-size:100% 100%;background-repeat:no-repeat;
+  }
+  .hz-info{flex:1;min-width:220px;}
+  .hz-info .row{margin-bottom:10px;}
+  .hz-info .label{font-size:.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;}
+  .hz-info .val{font-size:1rem;}
+  .hz-actions{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
+
+  .locked-msg{color:var(--gray);font-style:italic;padding:30px;text-align:center;}
+  .mobile-bar{display:none;}
+
+  /* Gamification overlay */
+  #confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:999;}
+  .float-pts{
+    position:fixed;font-family:'Baloo 2';font-weight:800;font-size:1.3rem;color:var(--gold-dark);
+    pointer-events:none;z-index:1000;animation:floatUp 1s ease-out forwards;text-shadow:0 2px 4px rgba(0,0,0,.15);
+  }
+  .toast{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%) translateY(-20px);
+    background:linear-gradient(135deg,var(--red),var(--red-light));color:#fff;
+    font-family:'Baloo 2';font-weight:700;padding:12px 24px;border-radius:14px;
+    box-shadow:0 8px 20px rgba(47,122,92,.35);z-index:1001;opacity:0;transition:.35s;font-size:.95rem;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .toast.gold{background:linear-gradient(135deg,var(--gold),#ffcf6b);color:#7a4d05;}
+
+  @media(max-width:800px){
+    .mobile-bar{
+      display:flex;align-items:center;justify-content:space-between;
+      position:sticky;top:0;z-index:300;background:var(--cream);
+      padding:10px 14px;border-bottom:2px solid var(--cream-2);margin:-18px -18px 14px;
+    }
+    .mobile-bar .icon-btn{
+      background:var(--red);color:#fff;border:none;border-radius:10px;
+      width:42px;height:42px;font-size:1.2rem;display:flex;align-items:center;justify-content:center;
+    }
+    .app{flex-direction:column;}
+    .main{padding:18px;}
+    .topbar h2{font-size:1.25rem;}
+    .tabs{
+      flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+      padding-bottom:4px;margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px;
+    }
+    .tab-btn{flex-shrink:0;padding:10px 16px;min-height:44px;}
+    .dialogue-group{padding:14px;}
+    .dlg-avatar-wrap{width:46px;}
+    .dlg-avatar{width:40px;height:40px;font-size:1.15rem;}
+    .dlg-who{font-size:.6rem;}
+    .dlg-hz{font-size:1.2rem;}
+    .dlg-bubble{padding:8px 34px 8px 12px;}
+
+    .btn, .btn-speak, .btn-mini, .order-item, select.blank{min-height:42px;}
+    .btn-speak{width:40px;height:40px;}
+    .order-item{padding:10px 15px;font-size:1.2rem;}
+    table.vocab thead{display:none;}
+    table.vocab, table.vocab tbody, table.vocab tr, table.vocab td{display:block;width:100%;}
+    table.vocab tr{
+      background:#fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.06);
+      margin-bottom:10px;padding:10px 12px;border-bottom:none;position:relative;
+    }
+    table.vocab td{border:none;padding:3px 0;}
+    table.vocab td:first-child{position:absolute;top:10px;right:10px;padding:0;}
+    table.vocab td:nth-child(2){font-size:2rem;padding-right:50px;width:auto;}
+    table.vocab td:nth-child(4){font-size:.88rem;color:var(--gray);}
+    .flashcard{width:100%;max-width:320px;height:200px;}
+    .hz-stage{flex-direction:column;align-items:center;}
+    #hanzi-target{width:220px !important;height:220px !important;}
+    .hz-picker{justify-content:center;}
+  }
+
+  /* Chế độ trình chiếu (giáo viên) — phóng to toàn bộ nội dung cho máy chiếu */
+  body.present .main{zoom:1.35;}
+  body.present .mobile-bar{display:none;}
+  body.present .topbar{display:none;}
+  body.present .goals-card{display:none;}
+  body.present .xp-box{background:none;box-shadow:none;padding:0;margin-bottom:14px;color:var(--ink);}
+  body.present .xp-box .lvl-row,
+  body.present .xp-box .xp-bar-bg{display:none;}
+  body.present .xp-box .streak-row{
+    justify-content:center;font-family:'Baloo 2';font-weight:700;font-size:1.15rem;
+    color:var(--red-dark);margin-top:0;
+  }
+  #present-exit-btn{
+    display:none;position:fixed;top:14px;right:14px;z-index:2000;
+    font-family:'Baloo 2',sans-serif;font-weight:700;font-size:.85rem;
+    background:var(--red-dark);color:#fff;border:none;border-radius:999px;
+    padding:10px 18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3);
+  }
+  #present-exit-btn:hover{filter:brightness(1.1);}
+  body.present #present-exit-btn{display:block;}
+  .present-toggle{
+    font-family:'Baloo 2';font-weight:700;background:var(--white);border:2px solid var(--cream-2);
+    color:var(--red-dark);border-radius:999px;padding:8px 16px;cursor:pointer;font-size:.85rem;
+    display:inline-flex;align-items:center;gap:6px;transition:.15s;
+  }
+  .present-toggle.active{background:var(--red);color:#fff;border-color:var(--red);}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3/dist/hanzi-writer.min.js"></script></head>
+<body>
+<button id="present-exit-btn" onclick="togglePresent()" aria-label="Thoát chế độ trình chiếu">✕ Thoát trình chiếu</button>
+<div class="app">
+  <div class="main">
+    <div class="mobile-bar">
+      <strong style="font-family:'Baloo 2';color:var(--red);">Tranghsk · Bài 4: 我有两个孩子</strong>
+      <button class="icon-btn" id="present-toggle-mobile" aria-label="Chế độ trình chiếu">🖥</button>
+    </div>
+    <div class="topbar">
+      <div class="topbar-brand">🐼 Tranghsk · Học tiếng Trung mỗi ngày</div>
+      <h2>Bài 4 · 我有两个孩子 (Tôi có hai đứa con)</h2>
+      <div class="desc">3 hội thoại: hỏi số lượng học sinh · hỏi thành viên gia đình · hỏi tuổi con cái</div>
+      <div class="topbar-actions">
+        <button class="present-toggle" id="present-toggle-desktop">🖥 Chế độ trình chiếu</button>
+        <div class="badge-row" id="badge-row"><span class="badge-pill ">🎯 Điền từ</span><span class="badge-pill ">🧩 Sắp câu</span><span class="badge-pill ">🎧 Nghe hiểu</span><span class="badge-pill ">🔥 Chuỗi 5</span><span class="badge-pill ">字 Viết chữ</span></div>
+      </div>
+    </div>
+
+    <div class="goals-card">
+      <div class="goals-head">🎯 <span class="hanzi">目标</span> Mục tiêu</div>
+      <label class="goal-item">
+        <input type="checkbox">
+        <span><span class="hanzi">能听懂并使用"有"字句(1)表达领有人或物品。</span>Có thể nghe hiểu và sử dụng câu chữ "有" (1) để diễn đạt sự sở hữu người hoặc vật.</span>
+      </label>
+      <label class="goal-item">
+        <input type="checkbox">
+        <span><span class="hanzi">掌握"A……，B呢？"的用法。</span>Nắm vững cách dùng cấu trúc "A……, B呢?" (còn B thì sao?).</span>
+      </label>
+      <label class="goal-item">
+        <input type="checkbox">
+        <span><span class="hanzi">掌握本课数词、量词的用法。</span>Nắm vững cách dùng số từ và lượng từ trong bài.</span>
+      </label>
+      <label class="goal-item">
+        <input type="checkbox">
+        <span><span class="hanzi">了解中国人如何问答年龄，能使用合适的词语进行年龄问答。</span>Hiểu cách người Trung Quốc hỏi - đáp về tuổi, biết dùng đúng từ ngữ để hỏi tuổi theo từng độ tuổi.</span>
+      </label>
+    </div>
+
+    <div class="xp-box" style="margin-bottom:18px;">
+      <div class="lvl-row"><span id="lvl-label">Cấp 1 🌱</span><span id="xp-label">0 XP</span></div>
+      <div class="xp-bar-bg"><div class="xp-bar-fill" id="xp-bar" style="width: 0%;"></div></div>
+      <div class="streak-row"><span class="streak-flame">🔥</span><span id="streak-label">Chuỗi đúng: 0</span></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="vocab">📖 Từ vựng</button>
+      <button class="tab-btn" data-tab="flash">🃏 Flashcard</button>
+      <button class="tab-btn" data-tab="grammar">语 Ngữ pháp</button>
+      <button class="tab-btn" data-tab="dialogue">💬 Bài khoá</button>
+      <button class="tab-btn" data-tab="write">📝 Bài tập</button>
+      <button class="tab-btn" data-tab="hanzi">字 Chữ Hán</button>
+    </div>
+
+    <!-- ================= TAB TỪ VỰNG ================= -->
+    <div class="panel active" id="panel-vocab">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+        <button class="btn secondary" id="vocab-py-toggle" onclick="toggleVocabPinyin()">🙈 Ẩn phiên âm</button>
+      </div>
+      <div class="card">
+        <table class="vocab">
+          <thead><tr><th></th><th>Chữ Hán</th><th>Pinyin</th><th>Từ loại</th><th>Nghĩa</th></tr></thead>
+          <tbody id="vocab-body"><tr>
+    <td><button class="btn-speak" onclick="speak('有')">🔊</button></td>
+    <td class="hz hanzi">有</td>
+    <td class="pinyin">yǒu</td>
+    <td><span class="pos">đgt.</span></td>
+    <td>có</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('多少')">🔊</button></td>
+    <td class="hz hanzi">多少</td>
+    <td class="pinyin">duōshao</td>
+    <td><span class="pos">đt.</span></td>
+    <td>bao nhiêu</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('个')">🔊</button></td>
+    <td class="hz hanzi">个</td>
+    <td class="pinyin">gè</td>
+    <td><span class="pos">lt.</span></td>
+    <td>(lượng từ chung, dùng cho người/vật)</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('哥哥')">🔊</button></td>
+    <td class="hz hanzi">哥哥</td>
+    <td class="pinyin">gēge</td>
+    <td><span class="pos">dt.</span></td>
+    <td>anh trai</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('呢')">🔊</button></td>
+    <td class="hz hanzi">呢</td>
+    <td class="pinyin">ne</td>
+    <td><span class="pos">trợ.</span></td>
+    <td>(trợ từ ngữ khí cuối câu hỏi, dùng để hỏi tiếp "còn... thì sao?")</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('没有')">🔊</button></td>
+    <td class="hz hanzi">没有</td>
+    <td class="pinyin">méiyǒu</td>
+    <td><span class="pos">đgt.</span></td>
+    <td>không có</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('家')">🔊</button></td>
+    <td class="hz hanzi">家</td>
+    <td class="pinyin">jiā</td>
+    <td><span class="pos">dt.</span></td>
+    <td>nhà, gia đình</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('几')">🔊</button></td>
+    <td class="hz hanzi">几</td>
+    <td class="pinyin">jǐ</td>
+    <td><span class="pos">đt.</span></td>
+    <td>mấy (hỏi số lượng nhỏ)</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('口')">🔊</button></td>
+    <td class="hz hanzi">口</td>
+    <td class="pinyin">kǒu</td>
+    <td><span class="pos">lt.</span></td>
+    <td>(lượng từ đếm người trong gia đình, v.v.)</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('爸爸')">🔊</button></td>
+    <td class="hz hanzi">爸爸</td>
+    <td class="pinyin">bàba</td>
+    <td><span class="pos">dt.</span></td>
+    <td>bố, cha</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('妈妈')">🔊</button></td>
+    <td class="hz hanzi">妈妈</td>
+    <td class="pinyin">māma</td>
+    <td><span class="pos">dt.</span></td>
+    <td>mẹ</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('妹妹')">🔊</button></td>
+    <td class="hz hanzi">妹妹</td>
+    <td class="pinyin">mèimei</td>
+    <td><span class="pos">dt.</span></td>
+    <td>em gái</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('和')">🔊</button></td>
+    <td class="hz hanzi">和</td>
+    <td class="pinyin">hé</td>
+    <td><span class="pos">lt.</span></td>
+    <td>và</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('儿子')">🔊</button></td>
+    <td class="hz hanzi">儿子</td>
+    <td class="pinyin">érzi</td>
+    <td><span class="pos">dt.</span></td>
+    <td>con trai</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('孩子')">🔊</button></td>
+    <td class="hz hanzi">孩子</td>
+    <td class="pinyin">háizi</td>
+    <td><span class="pos">dt.</span></td>
+    <td>con cái, trẻ em</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('女儿')">🔊</button></td>
+    <td class="hz hanzi">女儿</td>
+    <td class="pinyin">nǚ'ér</td>
+    <td><span class="pos">dt.</span></td>
+    <td>con gái</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('岁')">🔊</button></td>
+    <td class="hz hanzi">岁</td>
+    <td class="pinyin">suì</td>
+    <td><span class="pos">lt.</span></td>
+    <td>tuổi</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('他')">🔊</button></td>
+    <td class="hz hanzi">他</td>
+    <td class="pinyin">tā</td>
+    <td><span class="pos">đt.</span></td>
+    <td>anh ấy, nó (nam)</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('今年')">🔊</button></td>
+    <td class="hz hanzi">今年</td>
+    <td class="pinyin">jīnnián</td>
+    <td><span class="pos">dt.</span></td>
+    <td>năm nay</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('多')">🔊</button></td>
+    <td class="hz hanzi">多</td>
+    <td class="pinyin">duō</td>
+    <td><span class="pos">đt.</span></td>
+    <td>bao nhiêu, cỡ nào (hỏi mức độ)</td></tr><tr>
+    <td><button class="btn-speak" onclick="speak('大')">🔊</button></td>
+    <td class="hz hanzi">大</td>
+    <td class="pinyin">dà</td>
+    <td><span class="pos">tt.</span></td>
+    <td>lớn, nhiều tuổi</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= TAB NGỮ PHÁP ================= -->
+    <div class="panel" id="panel-grammar">
+      <div class="dialogue-group">
+        <div class="dialogue-head"><span class="dialogue-title">1. "有"字句(1) · Câu chữ "有" (biểu thị sở hữu)</span></div>
+        <p style="line-height:1.7;">"有" trong bài này biểu thị <b>sở hữu, lĩnh hữu</b> người hoặc vật. Hình thức phủ định là <b class="hanzi">没/没有</b> (không dùng 不有).</p>
+        <p style="line-height:1.7;color:var(--gray);font-size:.88rem;">Cấu trúc: Sub + <b class="hanzi" style="color:var(--red-dark);">有</b> + (Num+M) + N　|　phủ định: Sub + <b class="hanzi" style="color:var(--error);">没/没有</b> + N</p>
+        <div id="gm-1">
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('她有二十个学生。')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">Tā yǒu èrshí gè xuésheng.</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">她有二十个学生。</div>
+        <div style="color:var(--gray);font-size:.85rem;">Chị ấy có hai mươi học sinh.</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('她有一个姐姐。')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">Tā yǒu yí gè jiějie.</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">她有一个姐姐。</div>
+        <div style="color:var(--gray);font-size:.85rem;">Cô ấy có một chị gái.</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('我没/没有姐姐。')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">Wǒ méi/méiyǒu jiějie.</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">我没/没有姐姐。</div>
+        <div style="color:var(--gray);font-size:.85rem;">Tôi không có chị gái.</div>
+      </div>
+    </div></div>
+      </div>
+      <div class="dialogue-group">
+        <div class="dialogue-head"><span class="dialogue-title">2. 数字的表达 · Cách biểu đạt số từ</span></div>
+        <p style="line-height:1.7;">Số trong tiếng Trung có thể viết bằng <b>số Ả-rập</b> hoặc <b>chữ Hán</b> (VD: "1" và "一"). Số "2" viết/đọc là <b class="hanzi">二 (èr)</b> khi dùng trong số thứ tự (VD: 第二), và đọc là <b class="hanzi">两 (liǎng)</b> khi đứng trước lượng từ (VD: 两个人).</p>
+        <p style="line-height:1.7;color:var(--gray);font-size:.88rem;">VD: 十二 (12, dùng 二) 　|　 两个人 / 两口人 (2 người, dùng 两 vì đứng trước lượng từ)</p>
+        <div id="gm-2">
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('十二')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">shí'èr</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">十二</div>
+        <div style="color:var(--gray);font-size:.85rem;">12 (dùng 二 vì là số đếm/số thứ tự)</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('两个人')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">liǎng gè rén</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">两个人</div>
+        <div style="color:var(--gray);font-size:.85rem;">hai người (dùng 两 vì đứng trước lượng từ 个)</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('两口人 / 两本书')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">liǎng kǒu rén / liǎng běn shū</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">两口人 / 两本书</div>
+        <div style="color:var(--gray);font-size:.85rem;">hai người (nhân khẩu) / hai quyển sách</div>
+      </div>
+    </div></div>
+      </div>
+      <div class="dialogue-group">
+        <div class="dialogue-head"><span class="dialogue-title">3. 语气助词"呢"(1) · Trợ từ ngữ khí "呢"</span></div>
+        <p style="line-height:1.7;">"呢" trong bài này đặt ở <b>cuối câu</b>, dùng để hỏi tiếp về tình huống đã nêu ở vế trước — nghĩa là "còn... thì sao?".</p>
+        <p style="line-height:1.7;color:var(--gray);font-size:.88rem;">Cấu trúc: A……，B + <b class="hanzi" style="color:var(--red-dark);">呢</b>？</p>
+        <div id="gm-3">
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('我有两个哥哥，你呢？')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">Wǒ yǒu liǎng gè gēge, nǐ ne?</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">我有两个哥哥，你呢？</div>
+        <div style="color:var(--gray);font-size:.85rem;">Tôi có hai anh trai, còn bạn thì sao?</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('我叫白家月，你呢？')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">Wǒ jiào Bái Jiāyuè, nǐ ne?</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">我叫白家月，你呢？</div>
+        <div style="color:var(--gray);font-size:.85rem;">Tôi tên Bạch Gia Nguyệt, còn bạn?</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('我是中国人，你呢？')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">Wǒ shì Zhōngguó rén, nǐ ne?</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">我是中国人，你呢？</div>
+        <div style="color:var(--gray);font-size:.85rem;">Tôi là người Trung Quốc, còn bạn?</div>
+      </div>
+    </div></div>
+      </div>
+      <div class="dialogue-group">
+        <div class="dialogue-head"><span class="dialogue-title">4. 名量词和名量结构 · Lượng từ &amp; cấu trúc [Số+Lượng+(Danh)]</span></div>
+        <p style="line-height:1.7;">Khi biểu đạt số lượng, số từ tiếng Trung thường phải đi kèm <b>lượng từ</b>. Bài này học lượng từ chỉ người/vật <b class="hanzi">口, 个</b> và cấu trúc [Số + Lượng + (Danh)] như <b class="hanzi">四口人, 两个哥哥</b>.</p>
+        <p style="line-height:1.7;color:var(--gray);font-size:.88rem;">Cấu trúc: Số từ + <b class="hanzi" style="color:var(--red-dark);">量词 (口/个...)</b> + (Danh từ)</p>
+        <div id="gm-4">
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('四口')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">sì kǒu</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">四口</div>
+        <div style="color:var(--gray);font-size:.85rem;">bốn (nhân khẩu) — chỉ có Số+Lượng, chưa nói rõ danh từ</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('四口人')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">sì kǒu rén</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">四口人</div>
+        <div style="color:var(--gray);font-size:.85rem;">bốn người (trong nhà)</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('两个')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">liǎng gè</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">两个</div>
+        <div style="color:var(--gray);font-size:.85rem;">hai (cái/người) — Số+Lượng</div>
+      </div>
+    </div>
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('两个学生')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">liǎng gè xuésheng</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">两个学生</div>
+        <div style="color:var(--gray);font-size:.85rem;">hai học sinh — Số+Lượng+Danh</div>
+      </div>
+    </div></div>
+      </div>
+
+      <div class="card ex-block">
+        <div class="ex-title">✍️ Luyện tập nhanh · Điền 有 / 没有 / 呢 / 个 / 口 vào chỗ trống</div>
+        <div class="ex-sub">Gõ đáp án vào ô trống, sau đó bấm "Kiểm tra" để tự chấm.</div>
+        <div id="gm-practice">
+    <div class="fill-line hanzi">
+      1. 王一飞老师 <input type="text" id="gmp-0" style="width:56px;text-align:center;border:2px solid var(--red-light);border-radius:8px;padding:4px 6px;font-family:'Noto Sans SC';font-size:1.05rem;"> 二十个学生。
+      <button class="btn-mini yes" style="margin-left:8px;" onclick="checkGmp(0)">Kiểm tra</button>
+      <span id="gmp-result-0"></span>
+      <div style="color:var(--gray);font-size:.8rem;font-family:'Be Vietnam Pro';">Cô giáo Vương Nhất Phi có hai mươi học sinh.</div>
+    </div>
+    <div class="fill-line hanzi">
+      2. 杨同乐家 <input type="text" id="gmp-1" style="width:56px;text-align:center;border:2px solid var(--red-light);border-radius:8px;padding:4px 6px;font-family:'Noto Sans SC';font-size:1.05rem;"> 四口人。
+      <button class="btn-mini yes" style="margin-left:8px;" onclick="checkGmp(1)">Kiểm tra</button>
+      <span id="gmp-result-1"></span>
+      <div style="color:var(--gray);font-size:.8rem;font-family:'Be Vietnam Pro';">Nhà Dương Đồng Lạc có bốn người.</div>
+    </div>
+    <div class="fill-line hanzi">
+      3. 我有两个孩子，你 <input type="text" id="gmp-2" style="width:56px;text-align:center;border:2px solid var(--red-light);border-radius:8px;padding:4px 6px;font-family:'Noto Sans SC';font-size:1.05rem;">？
+      <button class="btn-mini yes" style="margin-left:8px;" onclick="checkGmp(2)">Kiểm tra</button>
+      <span id="gmp-result-2"></span>
+      <div style="color:var(--gray);font-size:.8rem;font-family:'Be Vietnam Pro';">Tôi có hai đứa con, còn bạn thì sao?</div>
+    </div>
+    <div class="fill-line hanzi">
+      4. 我 <input type="text" id="gmp-3" style="width:56px;text-align:center;border:2px solid var(--red-light);border-radius:8px;padding:4px 6px;font-family:'Noto Sans SC';font-size:1.05rem;"> 孩子。
+      <button class="btn-mini yes" style="margin-left:8px;" onclick="checkGmp(3)">Kiểm tra</button>
+      <span id="gmp-result-3"></span>
+      <div style="color:var(--gray);font-size:.8rem;font-family:'Be Vietnam Pro';">Tôi không có con.</div>
+    </div>
+    <div class="fill-line hanzi">
+      5. 您女儿今年多 <input type="text" id="gmp-4" style="width:56px;text-align:center;border:2px solid var(--red-light);border-radius:8px;padding:4px 6px;font-family:'Noto Sans SC';font-size:1.05rem;">？
+      <button class="btn-mini yes" style="margin-left:8px;" onclick="checkGmp(4)">Kiểm tra</button>
+      <span id="gmp-result-4"></span>
+      <div style="color:var(--gray);font-size:.8rem;font-family:'Be Vietnam Pro';">Con gái chị năm nay bao nhiêu tuổi?</div>
+    </div></div>
+      </div>
+    </div>
+
+    <!-- ================= TAB BÀI KHOÁ (HỘI THOẠI) ================= -->
+    <div class="panel" id="panel-dialogue">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+        <button class="btn secondary" id="dialogue-py-toggle" onclick="toggleDialoguePinyin()">🙈 Ẩn phiên âm</button>
+      </div>
+      <div id="dialogue-container"><div class="dialogue-group">
+    <div class="dialogue-head">
+      <span class="dialogue-title">1. Hỏi số lượng học sinh</span>
+      <button class="btn secondary btn-play-all" onclick="playDialogue(0, this)">▶ Nghe cả đoạn</button>
+    </div>
+    <div class="dlg-lines" id="dlg-lines-0"><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">🧑</div>
+        <div class="dlg-who">Liú Míng<br><span class="hz-mini hanzi">刘明</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Yīfēi máng ma?</div>
+        <div class="dlg-hz hanzi">一飞忙吗？</div>
+        <button class="btn-speak" onclick="speak('一飞忙吗？')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">👩</div>
+        <div class="dlg-who">Wáng Yīxuě<br><span class="hz-mini hanzi">王一雪</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Tā hěn máng.</div>
+        <div class="dlg-hz hanzi">她很忙。</div>
+        <button class="btn-speak" onclick="speak('她很忙。')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">🧑</div>
+        <div class="dlg-who">Liú Míng<br><span class="hz-mini hanzi">刘明</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Tā yǒu duōshao gè xuésheng?</div>
+        <div class="dlg-hz hanzi">她有多少个学生？</div>
+        <button class="btn-speak" onclick="speak('她有多少个学生？')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">👩</div>
+        <div class="dlg-who">Wáng Yīxuě<br><span class="hz-mini hanzi">王一雪</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Tā yǒu èrshí gè xuésheng.</div>
+        <div class="dlg-hz hanzi">她有二十个学生。</div>
+        <button class="btn-speak" onclick="speak('她有二十个学生。')">🔊</button>
+      </div></div></div></div><div class="dialogue-group">
+    <div class="dialogue-head">
+      <span class="dialogue-title">2. Hỏi thành viên trong nhà</span>
+      <button class="btn secondary btn-play-all" onclick="playDialogue(1, this)">▶ Nghe cả đoạn</button>
+    </div>
+    <div class="dlg-lines" id="dlg-lines-1"><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">👩‍🦰</div>
+        <div class="dlg-who">Wáng Yīxuě<br><span class="hz-mini hanzi">王一雪</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Wǒ yǒu liǎng gè gēge, nǐ ne?</div>
+        <div class="dlg-hz hanzi">我有两个哥哥，你呢？</div>
+        <button class="btn-speak" onclick="speak('我有两个哥哥，你呢？')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">🧑‍🦱</div>
+        <div class="dlg-who">Yáng Tónglè<br><span class="hz-mini hanzi">杨同乐</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Wǒ méiyǒu gēge.</div>
+        <div class="dlg-hz hanzi">我没有哥哥。</div>
+        <button class="btn-speak" onclick="speak('我没有哥哥。')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">👩‍🦰</div>
+        <div class="dlg-who">王一雪<br><span class="hz-mini hanzi">王一雪</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Nǐ jiā yǒu jǐ kǒu rén?</div>
+        <div class="dlg-hz hanzi">你家有几口人？</div>
+        <button class="btn-speak" onclick="speak('你家有几口人？')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">🧑‍🦱</div>
+        <div class="dlg-who">杨同乐<br><span class="hz-mini hanzi">杨同乐</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.</div>
+        <div class="dlg-hz hanzi">我家有四口人，爸爸、妈妈、妹妹和我。</div>
+        <button class="btn-speak" onclick="speak('我家有四口人，爸爸、妈妈、妹妹和我。')">🔊</button>
+      </div></div></div></div><div class="dialogue-group">
+    <div class="dialogue-head">
+      <span class="dialogue-title">3. Hỏi tuổi con cái</span>
+      <button class="btn secondary btn-play-all" onclick="playDialogue(2, this)">▶ Nghe cả đoạn</button>
+    </div>
+    <div class="dlg-lines" id="dlg-lines-2"><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">👩‍🦰</div>
+        <div class="dlg-who">Yáng Tónglè<br><span class="hz-mini hanzi">杨同乐</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Zhè shì nín érzi ma?</div>
+        <div class="dlg-hz hanzi">这是您儿子吗？</div>
+        <button class="btn-speak" onclick="speak('这是您儿子吗？')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">🧑‍🦱</div>
+        <div class="dlg-who">Wáng Yīxuě<br><span class="hz-mini hanzi">王一雪</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Shì de. Wǒ yǒu liǎng gè háizi, yí gè érzi, yí gè nǚ'ér.</div>
+        <div class="dlg-hz hanzi">是的。我有两个孩子，一个儿子，一个女儿。</div>
+        <button class="btn-speak" onclick="speak('是的。我有两个孩子，一个儿子，一个女儿。')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">👩‍🦰</div>
+        <div class="dlg-who">杨同乐<br><span class="hz-mini hanzi">杨同乐</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Nín érzi jǐ suì?</div>
+        <div class="dlg-hz hanzi">您儿子几岁？</div>
+        <button class="btn-speak" onclick="speak('您儿子几岁？')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">🧑‍🦱</div>
+        <div class="dlg-who">王一雪<br><span class="hz-mini hanzi">王一雪</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Tā jīnnián wǔ suì.</div>
+        <div class="dlg-hz hanzi">他今年五岁。</div>
+        <button class="btn-speak" onclick="speak('他今年五岁。')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">👩‍🦰</div>
+        <div class="dlg-who">杨同乐<br><span class="hz-mini hanzi">杨同乐</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Nín nǚ'ér duō dà?</div>
+        <div class="dlg-hz hanzi">您女儿多大？</div>
+        <button class="btn-speak" onclick="speak('您女儿多大？')">🔊</button>
+      </div></div><div class="dlg-line">
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">🧑‍🦱</div>
+        <div class="dlg-who">王一雪<br><span class="hz-mini hanzi">王一雪</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">Tā jīnnián shí'èr.</div>
+        <div class="dlg-hz hanzi">她今年十二。</div>
+        <button class="btn-speak" onclick="speak('她今年十二。')">🔊</button>
+      </div></div></div></div></div>
+      <div class="ex-sub" style="margin-top:-6px;">🔊 Giọng đọc dùng công nghệ phát âm của trình duyệt (Web Speech API) — không phải file ghi âm sẵn. Nếu máy/trình duyệt không hỗ trợ giọng tiếng Trung, hãy thử trên Chrome.</div>
+    </div>
+
+    <!-- ================= TAB FLASHCARD ================= -->
+    <div class="panel" id="panel-flash">
+      <div class="card fc-wrap">
+        <div class="fc-progress" id="fc-progress">1 / 21</div>
+        <div class="fc-stars">⭐ Đã thuộc: <span id="fc-known-count">0</span>/21</div>
+        <div class="flashcard" id="flashcard">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><div class="hz" id="fc-hz">有</div><div class="hint">👆 Nhấp để lật thẻ</div></div>
+            <div class="fc-face fc-back">
+              <div class="pinyin" id="fc-pinyin">yǒu</div>
+              <div class="mean" id="fc-mean">có</div>
+            </div>
+          </div>
+        </div>
+        <div class="fc-controls">
+          <button class="btn secondary" onclick="fcPrev()">◀ Trước</button>
+          <button class="btn secondary" onclick="flipCard()">🔄 Lật thẻ</button>
+          <button class="btn" onclick="fcNext()">Sau ▶</button>
+        </div>
+        <div class="fc-controls">
+          <button class="btn gold" onclick="fcKnown(true)">✅ Đã thuộc</button>
+          <button class="btn secondary" onclick="fcKnown(false)">🔁 Ôn lại</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB LUYỆN VIẾT CÂU ================= -->
+    <div class="panel" id="panel-write">
+      <div class="score-box"><span class="star">⭐</span> Điểm: <span id="total-score">0</span> / <span id="total-max">22</span></div>
+
+      <div class="card ex-block">
+        <div class="ex-title">Dạng 1 · Nghe và chọn từ vựng nghe được</div>
+        <div class="ex-sub">Bấm 🔊 để nghe, sau đó chọn đúng chữ Hán vừa nghe.</div>
+        <div id="listen-vocab-container"><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 1.</span>
+      <button class="btn-listen" onclick="speak('有')">🔊</button>
+    </div>
+    <div class="mc-options" id="lv-opts-0">
+      <button class="mc-opt hanzi" onclick="checkListenVocab(this,0,'有')">有</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,0,'今年')">今年</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,0,'孩子')">孩子</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,0,'妈妈')">妈妈</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 2.</span>
+      <button class="btn-listen" onclick="speak('哥哥')">🔊</button>
+    </div>
+    <div class="mc-options" id="lv-opts-1">
+      <button class="mc-opt hanzi" onclick="checkListenVocab(this,1,'呢')">呢</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,1,'妹妹')">妹妹</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,1,'哥哥')">哥哥</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,1,'个')">个</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 3.</span>
+      <button class="btn-listen" onclick="speak('家')">🔊</button>
+    </div>
+    <div class="mc-options" id="lv-opts-2">
+      <button class="mc-opt hanzi" onclick="checkListenVocab(this,2,'个')">个</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,2,'大')">大</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,2,'他')">他</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,2,'家')">家</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 4.</span>
+      <button class="btn-listen" onclick="speak('爸爸')">🔊</button>
+    </div>
+    <div class="mc-options" id="lv-opts-3">
+      <button class="mc-opt hanzi" onclick="checkListenVocab(this,3,'有')">有</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,3,'多少')">多少</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,3,'爸爸')">爸爸</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,3,'岁')">岁</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 5.</span>
+      <button class="btn-listen" onclick="speak('女儿')">🔊</button>
+    </div>
+    <div class="mc-options" id="lv-opts-4">
+      <button class="mc-opt hanzi" onclick="checkListenVocab(this,4,'哥哥')">哥哥</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,4,'女儿')">女儿</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,4,'妹妹')">妹妹</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,4,'呢')">呢</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 6.</span>
+      <button class="btn-listen" onclick="speak('岁')">🔊</button>
+    </div>
+    <div class="mc-options" id="lv-opts-5">
+      <button class="mc-opt hanzi" onclick="checkListenVocab(this,5,'口')">口</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,5,'多')">多</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,5,'岁')">岁</button><button class="mc-opt hanzi" onclick="checkListenVocab(this,5,'儿子')">儿子</button>
+    </div></div></div>
+      </div>
+
+      <div class="card ex-block">
+        <div class="ex-title">Dạng 2 · Nghe và chọn câu nghe được</div>
+        <div class="ex-sub">Bấm 🔊 để nghe, sau đó chọn đúng câu vừa nghe.</div>
+        <div id="listen-sentence-container"><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 1.</span>
+      <button class="btn-listen" onclick="speak('她有二十个学生。')">🔊</button>
+    </div>
+    <div class="mc-options" id="ls-opts-0">
+      <button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,0,'你家有几口人？')">你家有几口人？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,0,'她有二十个学生。')">她有二十个学生。</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,0,'我没有哥哥。')">我没有哥哥。</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,0,'这是您儿子吗？')">这是您儿子吗？</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 2.</span>
+      <button class="btn-listen" onclick="speak('我有两个哥哥，你呢？')">🔊</button>
+    </div>
+    <div class="mc-options" id="ls-opts-1">
+      <button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,1,'你家有几口人？')">你家有几口人？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,1,'我家有四口人，爸爸、妈妈、妹妹和我。')">我家有四口人，爸爸、妈妈、妹妹和我。</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,1,'我有两个哥哥，你呢？')">我有两个哥哥，你呢？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,1,'这是您儿子吗？')">这是您儿子吗？</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 3.</span>
+      <button class="btn-listen" onclick="speak('你家有几口人？')">🔊</button>
+    </div>
+    <div class="mc-options" id="ls-opts-2">
+      <button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,2,'我家有四口人，爸爸、妈妈、妹妹和我。')">我家有四口人，爸爸、妈妈、妹妹和我。</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,2,'你家有几口人？')">你家有几口人？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,2,'她今年十二。')">她今年十二。</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,2,'这是您儿子吗？')">这是您儿子吗？</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 4.</span>
+      <button class="btn-listen" onclick="speak('您儿子几岁？')">🔊</button>
+    </div>
+    <div class="mc-options" id="ls-opts-3">
+      <button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,3,'她有多少个学生？')">她有多少个学生？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,3,'一飞忙吗？')">一飞忙吗？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,3,'您儿子几岁？')">您儿子几岁？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,3,'是的。我有两个孩子，一个儿子，一个女儿。')">是的。我有两个孩子，一个儿子，一个女儿。</button>
+    </div></div><div class="listen-item">
+    <div class="listen-head">
+      <span class="listen-num">Câu 5.</span>
+      <button class="btn-listen" onclick="speak('他今年五岁。')">🔊</button>
+    </div>
+    <div class="mc-options" id="ls-opts-4">
+      <button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,4,'他今年五岁。')">他今年五岁。</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,4,'这是您儿子吗？')">这是您儿子吗？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,4,'您儿子几岁？')">您儿子几岁？</button><button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,4,'您女儿多大？')">您女儿多大？</button>
+    </div></div></div>
+      </div>
+
+      <div class="card ex-block">
+        <div class="ex-title">Dạng 3 · Điền từ vào đoạn văn</div>
+        <div class="ex-sub">Chọn từ đúng trong danh sách thả xuống để hoàn thành hội thoại.</div>
+        <div id="fill-container"><div class="fill-line">1. 王一飞老师有
+    <select class="blank hanzi" data-answer="二十" data-idx="0">
+      <option value="">--chọn--</option>
+      <option value="没">没</option><option value="二十">二十</option><option value="口">口</option>
+    </select>
+    个学生。 <span style="color:var(--gray);font-size:.82rem;">(Cô giáo Vương Nhất Phi có hai mươi học sinh.)</span></div><div class="fill-line">2. 杨同乐家有四
+    <select class="blank hanzi" data-answer="口" data-idx="1">
+      <option value="">--chọn--</option>
+      <option value="口">口</option><option value="呢">呢</option><option value="大">大</option>
+    </select>
+    人。 <span style="color:var(--gray);font-size:.82rem;">(Nhà Dương Đồng Lạc có bốn người.)</span></div><div class="fill-line">3. 王一雪：我有两个孩子，你
+    <select class="blank hanzi" data-answer="呢" data-idx="2">
+      <option value="">--chọn--</option>
+      <option value="的">的</option><option value="是">是</option><option value="呢">呢</option>
+    </select>
+    ？ <span style="color:var(--gray);font-size:.82rem;">(Tôi có hai đứa con, còn bạn thì sao?)</span></div><div class="fill-line">4. 杨同乐：我
+    <select class="blank hanzi" data-answer="没" data-idx="3">
+      <option value="">--chọn--</option>
+      <option value="有">有</option><option value="几">几</option><option value="没">没</option>
+    </select>
+    孩子。 <span style="color:var(--gray);font-size:.82rem;">(Tôi không có con.)</span></div><div class="fill-line">5. 杨同乐：您女儿今年多
+    <select class="blank hanzi" data-answer="大" data-idx="4">
+      <option value="">--chọn--</option>
+      <option value="多少">多少</option><option value="大">大</option><option value="几">几</option>
+    </select>
+    ？ <span style="color:var(--gray);font-size:.82rem;">(Con gái chị năm nay bao nhiêu tuổi?)</span></div><div class="fill-line">6. 你家有
+    <select class="blank hanzi" data-answer="几" data-idx="5">
+      <option value="">--chọn--</option>
+      <option value="几">几</option><option value="个">个</option><option value="多">多</option>
+    </select>
+    口人？ <span style="color:var(--gray);font-size:.82rem;">(Nhà bạn có mấy người?)</span></div><div class="fill-line">7. 我
+    <select class="blank hanzi" data-answer="有" data-idx="6">
+      <option value="">--chọn--</option>
+      <option value="是">是</option><option value="有">有</option><option value="呢">呢</option>
+    </select>
+    两个哥哥。 <span style="color:var(--gray);font-size:.82rem;">(Tôi có hai anh trai.)</span></div></div>
+        <button class="btn btn-check" onclick="checkFill()">Kiểm tra</button>
+        <span id="fill-result"></span>
+      </div>
+
+      <div class="card ex-block">
+        <div class="ex-title">Dạng 4 · Sắp xếp từ thành câu</div>
+        <div class="ex-sub">Nhấp vào các từ theo đúng thứ tự để tạo thành câu hoàn chỉnh.</div>
+        <div id="order-container"><div style="margin-bottom: 18px;">
+    <div style="font-size:.85rem;color:var(--gray);margin-bottom:4px;">Câu 1 · Chị ấy có hai mươi học sinh.</div>
+    <div class="order-zone hanzi" id="zone-0"></div>
+    <div class="order-bank hanzi" id="bank-0"><span class="order-item">她</span><span class="order-item">学生</span><span class="order-item">二十个</span><span class="order-item">。</span><span class="order-item">有</span></div>
+    <button class="btn secondary" onclick="resetOrder(0)">↺ Làm lại</button>
+    <button class="btn btn-check" onclick="checkOrder(0)">Kiểm tra</button>
+    <span id="order-result-0"></span></div><div style="margin-bottom: 18px;">
+    <div style="font-size:.85rem;color:var(--gray);margin-bottom:4px;">Câu 2 · Nhà tôi có bốn người.</div>
+    <div class="order-zone hanzi" id="zone-1"></div>
+    <div class="order-bank hanzi" id="bank-1"><span class="order-item">家</span><span class="order-item">四口人</span><span class="order-item">有</span><span class="order-item">我</span><span class="order-item">。</span></div>
+    <button class="btn secondary" onclick="resetOrder(1)">↺ Làm lại</button>
+    <button class="btn btn-check" onclick="checkOrder(1)">Kiểm tra</button>
+    <span id="order-result-1"></span></div><div style="margin-bottom: 18px;">
+    <div style="font-size:.85rem;color:var(--gray);margin-bottom:4px;">Câu 3 · Nhà bạn có mấy người?</div>
+    <div class="order-zone hanzi" id="zone-2"></div>
+    <div class="order-bank hanzi" id="bank-2"><span class="order-item">你</span><span class="order-item">几口人</span><span class="order-item">家</span><span class="order-item">有</span><span class="order-item">？</span></div>
+    <button class="btn secondary" onclick="resetOrder(2)">↺ Làm lại</button>
+    <button class="btn btn-check" onclick="checkOrder(2)">Kiểm tra</button>
+    <span id="order-result-2"></span></div><div style="margin-bottom: 18px;">
+    <div style="font-size:.85rem;color:var(--gray);margin-bottom:4px;">Câu 4 · Tôi có hai đứa con.</div>
+    <div class="order-zone hanzi" id="zone-3"></div>
+    <div class="order-bank hanzi" id="bank-3"><span class="order-item">有</span><span class="order-item">。</span><span class="order-item">我</span><span class="order-item">孩子</span><span class="order-item">两个</span></div>
+    <button class="btn secondary" onclick="resetOrder(3)">↺ Làm lại</button>
+    <button class="btn btn-check" onclick="checkOrder(3)">Kiểm tra</button>
+    <span id="order-result-3"></span></div></div>
+      </div>
+    </div>
+
+    <!-- ================= TAB CHỮ HÁN ================= -->
+    <div class="panel" id="panel-hanzi">
+      <div class="card">
+        <div class="hz-picker" id="hz-picker"><div class="hz-chip hanzi active">有</div><div class="hz-chip hanzi">家</div><div class="hz-chip hanzi">几</div><div class="hz-chip hanzi">口</div><div class="hz-chip hanzi">爸</div><div class="hz-chip hanzi">妈</div><div class="hz-chip hanzi">哥</div><div class="hz-chip hanzi">妹</div><div class="hz-chip hanzi">儿</div><div class="hz-chip hanzi">岁</div><div class="hz-chip hanzi">大</div></div>
+        <div class="hz-stage">
+          <div>
+            <div id="hanzi-target" style="width:260px;height:260px;"><svg width="260" height="260"><defs><clipPath id="mask-1"><path d="M 472 626 Q 601 647 868 646 Q 890 646 896 656 Q 902 669 883 684 Q 817 730 754 712 Q 714 705 486 666 L 435 659 Q 306 644 162 625 Q 138 622 156 603 Q 190 572 233 581 Q 321 606 421 619 L 472 626 Z"></path></clipPath><clipPath id="mask-2"><path d="M 411 492 Q 442 549 472 626 L 486 666 Q 513 750 539 800 Q 546 810 540 821 Q 533 831 500 849 Q 476 861 466 857 Q 453 853 455 837 Q 465 753 437 664 Q 436 663 435 659 L 421 619 Q 354 462 198 305 Q 149 259 79 199 Q 72 190 78 188 Q 87 185 98 191 Q 291 290 388 451 L 411 492 Z"></path></clipPath><clipPath id="mask-3"><path d="M 426 226 Q 430 283 435 324 L 438 351 Q 442 421 448 444 Q 449 451 449 456 C 451 474 451 474 427 485 Q 418 491 411 492 C 383 504 381 480 388 451 Q 418 337 366 150 Q 356 120 344 99 Q 323 63 353 17 L 355 15 Q 362 0 372 6 Q 408 27 424 197 L 426 226 Z"></path></clipPath><clipPath id="mask-4"><path d="M 449 456 Q 525 472 604 489 Q 625 495 630 484 Q 651 429 649 119 Q 643 50 639 43 Q 635 37 615 41 Q 587 48 559 55 Q 540 61 540 51 Q 598 2 631 -35 Q 644 -54 660 -58 Q 670 -62 678 -52 Q 717 -1 716 52 Q 680 424 707 473 Q 719 492 707 503 Q 685 522 648 536 Q 629 543 614 536 Q 542 497 427 485 C 397 481 420 450 449 456 Z"></path></clipPath><clipPath id="mask-5"><path d="M 435 324 Q 441 323 452 324 Q 531 337 590 346 Q 615 350 605 364 Q 593 379 567 383 Q 536 386 438 351 C 410 341 405 326 435 324 Z"></path></clipPath><clipPath id="mask-6"><path d="M 424 197 Q 428 197 435 197 Q 526 209 593 215 Q 618 218 609 232 Q 599 248 572 253 Q 539 259 426 226 C 397 218 394 197 424 197 Z"></path></clipPath><clipPath id="mask-7"><path d="M 472 626 Q 601 647 868 646 Q 890 646 896 656 Q 902 669 883 684 Q 817 730 754 712 Q 714 705 486 666 L 435 659 Q 306 644 162 625 Q 138 622 156 603 Q 190 572 233 581 Q 321 606 421 619 L 472 626 Z"></path></clipPath><clipPath id="mask-8"><path d="M 411 492 Q 442 549 472 626 L 486 666 Q 513 750 539 800 Q 546 810 540 821 Q 533 831 500 849 Q 476 861 466 857 Q 453 853 455 837 Q 465 753 437 664 Q 436 663 435 659 L 421 619 Q 354 462 198 305 Q 149 259 79 199 Q 72 190 78 188 Q 87 185 98 191 Q 291 290 388 451 L 411 492 Z"></path></clipPath><clipPath id="mask-9"><path d="M 426 226 Q 430 283 435 324 L 438 351 Q 442 421 448 444 Q 449 451 449 456 C 451 474 451 474 427 485 Q 418 491 411 492 C 383 504 381 480 388 451 Q 418 337 366 150 Q 356 120 344 99 Q 323 63 353 17 L 355 15 Q 362 0 372 6 Q 408 27 424 197 L 426 226 Z"></path></clipPath><clipPath id="mask-10"><path d="M 449 456 Q 525 472 604 489 Q 625 495 630 484 Q 651 429 649 119 Q 643 50 639 43 Q 635 37 615 41 Q 587 48 559 55 Q 540 61 540 51 Q 598 2 631 -35 Q 644 -54 660 -58 Q 670 -62 678 -52 Q 717 -1 716 52 Q 680 424 707 473 Q 719 492 707 503 Q 685 522 648 536 Q 629 543 614 536 Q 542 497 427 485 C 397 481 420 450 449 456 Z"></path></clipPath><clipPath id="mask-11"><path d="M 435 324 Q 441 323 452 324 Q 531 337 590 346 Q 615 350 605 364 Q 593 379 567 383 Q 536 386 438 351 C 410 341 405 326 435 324 Z"></path></clipPath><clipPath id="mask-12"><path d="M 424 197 Q 428 197 435 197 Q 526 209 593 215 Q 618 218 609 232 Q 599 248 572 253 Q 539 259 426 226 C 397 218 394 197 424 197 Z"></path></clipPath><clipPath id="mask-13"><path d="M 472 626 Q 601 647 868 646 Q 890 646 896 656 Q 902 669 883 684 Q 817 730 754 712 Q 714 705 486 666 L 435 659 Q 306 644 162 625 Q 138 622 156 603 Q 190 572 233 581 Q 321 606 421 619 L 472 626 Z"></path></clipPath><clipPath id="mask-14"><path d="M 411 492 Q 442 549 472 626 L 486 666 Q 513 750 539 800 Q 546 810 540 821 Q 533 831 500 849 Q 476 861 466 857 Q 453 853 455 837 Q 465 753 437 664 Q 436 663 435 659 L 421 619 Q 354 462 198 305 Q 149 259 79 199 Q 72 190 78 188 Q 87 185 98 191 Q 291 290 388 451 L 411 492 Z"></path></clipPath><clipPath id="mask-15"><path d="M 426 226 Q 430 283 435 324 L 438 351 Q 442 421 448 444 Q 449 451 449 456 C 451 474 451 474 427 485 Q 418 491 411 492 C 383 504 381 480 388 451 Q 418 337 366 150 Q 356 120 344 99 Q 323 63 353 17 L 355 15 Q 362 0 372 6 Q 408 27 424 197 L 426 226 Z"></path></clipPath><clipPath id="mask-16"><path d="M 449 456 Q 525 472 604 489 Q 625 495 630 484 Q 651 429 649 119 Q 643 50 639 43 Q 635 37 615 41 Q 587 48 559 55 Q 540 61 540 51 Q 598 2 631 -35 Q 644 -54 660 -58 Q 670 -62 678 -52 Q 717 -1 716 52 Q 680 424 707 473 Q 719 492 707 503 Q 685 522 648 536 Q 629 543 614 536 Q 542 497 427 485 C 397 481 420 450 449 456 Z"></path></clipPath><clipPath id="mask-17"><path d="M 435 324 Q 441 323 452 324 Q 531 337 590 346 Q 615 350 605 364 Q 593 379 567 383 Q 536 386 438 351 C 410 341 405 326 435 324 Z"></path></clipPath><clipPath id="mask-18"><path d="M 424 197 Q 428 197 435 197 Q 526 209 593 215 Q 618 218 609 232 Q 599 248 572 253 Q 539 259 426 226 C 397 218 394 197 424 197 Z"></path></clipPath></defs><g transform="translate(12, 219.421875) scale(0.23046875, -0.23046875)"><g style="opacity: 1;"><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-1&quot;)" d="M 60.4 630.4 L 213 605 L 502 652 L 789 682 L 883 663" stroke="rgba(221,221,221,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="832.0063957682638,832.0063957682638" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-2&quot;)" d="M 411.1 922.8 L 497 805 L 484 745 L 443 612 L 386 497 L 329 411 L 251 324 L 169 252 L 83 193" stroke="rgba(221,221,221,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="908.1606419490156,908.1606419490156" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-3&quot;)" d="M 364.1 569.8 L 418 471 L 420 419 L 414 294 L 397 163 L 370 73 L 367 16" stroke="rgba(221,221,221,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="572.852428050332,572.852428050332" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-4&quot;)" d="M 346.6 528.7 L 456 474 L 484 478 L 626 515 L 656 500 L 670 483 L 671 314 L 681 115 L 677 34 L 659 2 L 628 10 L 550 48" stroke="rgba(221,221,221,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="957.7975053882093,957.7975053882093" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-5&quot;)" d="M 360.9 267.5 L 454 342 L 548 361 L 595 357" stroke="rgba(221,221,221,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="262.28026898268945,262.28026898268945" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-6&quot;)" d="M 350 144 L 442 213 L 482 223 L 552 233 L 598 226" stroke="rgba(221,221,221,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="273.47129487135874,273.47129487135874" style="opacity: 1; stroke-dashoffset: 0;"></path></g><g style="opacity: 1;"><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-7&quot;)" d="M 60.4 630.4 L 213 605 L 502 652 L 789 682 L 883 663" stroke="rgba(179,93,82,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="832.0063957682638,832.0063957682638" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-8&quot;)" d="M 411.1 922.8 L 497 805 L 484 745 L 443 612 L 386 497 L 329 411 L 251 324 L 169 252 L 83 193" stroke="rgba(179,93,82,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="908.1606419490156,908.1606419490156" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-9&quot;)" d="M 364.1 569.8 L 418 471 L 420 419 L 414 294 L 397 163 L 370 73 L 367 16" stroke="rgba(217,138,128,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="572.852428050332,572.852428050332" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-10&quot;)" d="M 346.6 528.7 L 456 474 L 484 478 L 626 515 L 656 500 L 670 483 L 671 314 L 681 115 L 677 34 L 659 2 L 628 10 L 550 48" stroke="rgba(217,138,128,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="957.7975053882093,957.7975053882093" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-11&quot;)" d="M 360.9 267.5 L 454 342 L 548 361 L 595 357" stroke="rgba(217,138,128,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="262.28026898268945,262.28026898268945" style="opacity: 1; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-12&quot;)" d="M 350 144 L 442 213 L 482 223 L 552 233 L 598 226" stroke="rgba(217,138,128,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="273.47129487135874,273.47129487135874" style="opacity: 1; stroke-dashoffset: 0;"></path></g><g style="opacity: 1;"><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-13&quot;)" d="M 60.4 630.4 L 213 605 L 502 652 L 789 682 L 883 663" stroke="rgba(170,170,255,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="832.0063957682638,832.0063957682638" style="opacity: 0; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-14&quot;)" d="M 411.1 922.8 L 497 805 L 484 745 L 443 612 L 386 497 L 329 411 L 251 324 L 169 252 L 83 193" stroke="rgba(170,170,255,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="908.1606419490156,908.1606419490156" style="opacity: 0; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-15&quot;)" d="M 364.1 569.8 L 418 471 L 420 419 L 414 294 L 397 163 L 370 73 L 367 16" stroke="rgba(170,170,255,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="572.852428050332,572.852428050332" style="opacity: 0; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-16&quot;)" d="M 346.6 528.7 L 456 474 L 484 478 L 626 515 L 656 500 L 670 483 L 671 314 L 681 115 L 677 34 L 659 2 L 628 10 L 550 48" stroke="rgba(170,170,255,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="957.7975053882093,957.7975053882093" style="opacity: 0; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-17&quot;)" d="M 360.9 267.5 L 454 342 L 548 361 L 595 357" stroke="rgba(170,170,255,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="262.28026898268945,262.28026898268945" style="opacity: 0; stroke-dashoffset: 0;"></path><path clip-path="url(&quot;file:///C:/Users/TRANG/Downloads/Tranghsk_HSK1_Bai4_OnTap.html#mask-18&quot;)" d="M 350 144 L 442 213 L 482 223 L 552 233 L 598 226" stroke="rgba(170,170,255,1)" stroke-width="200" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke-dasharray="273.47129487135874,273.47129487135874" style="opacity: 0; stroke-dashoffset: 0;"></path></g></g></svg></div>
+            <div class="hz-actions">
+              <button class="btn secondary" onclick="hzAnimate()">▶ Xem thứ tự nét</button>
+              <button class="btn secondary" onclick="hzQuiz()">✍️ Tự viết (đố nét)</button>
+              <button class="btn secondary" onclick="hzOutline()">🖊 Tô nét mờ</button>
+            </div>
+          </div>
+          <div class="hz-info">
+            <div class="row"><div class="label">Pinyin</div><div class="val" id="hz-pinyin">yǒu</div></div>
+            <div class="row"><div class="label">Bộ thủ</div><div class="val" id="hz-radical">月(nguyệt/nhục)</div></div>
+            <div class="row"><div class="label">Số nét</div><div class="val" id="hz-strokes">6</div></div>
+            <div class="row"><div class="label">Nghĩa</div><div class="val" id="hz-mean">có</div></div>
+            <div class="row"><div class="label">Mẹo nhớ</div><div class="val" id="hz-tip">Phần trên là bàn tay (ナ), phần dưới là 月 (thịt) — tay cầm miếng thịt trong nhà, nghĩa là 'có' của cải.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<canvas id="confetti-canvas" width="974" height="732"></canvas>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ DỮ LIỆU BÀI 4 ============ */
+const VOCAB = [
+  {hz:"有", py:"yǒu", pos:"đgt.", mean:"có"},
+  {hz:"多少", py:"duōshao", pos:"đt.", mean:"bao nhiêu"},
+  {hz:"个", py:"gè", pos:"lt.", mean:"(lượng từ chung, dùng cho người/vật)"},
+  {hz:"哥哥", py:"gēge", pos:"dt.", mean:"anh trai"},
+  {hz:"呢", py:"ne", pos:"trợ.", mean:"(trợ từ ngữ khí cuối câu hỏi, dùng để hỏi tiếp \"còn... thì sao?\")"},
+  {hz:"没有", py:"méiyǒu", pos:"đgt.", mean:"không có"},
+  {hz:"家", py:"jiā", pos:"dt.", mean:"nhà, gia đình"},
+  {hz:"几", py:"jǐ", pos:"đt.", mean:"mấy (hỏi số lượng nhỏ)"},
+  {hz:"口", py:"kǒu", pos:"lt.", mean:"(lượng từ đếm người trong gia đình, v.v.)"},
+  {hz:"爸爸", py:"bàba", pos:"dt.", mean:"bố, cha"},
+  {hz:"妈妈", py:"māma", pos:"dt.", mean:"mẹ"},
+  {hz:"妹妹", py:"mèimei", pos:"dt.", mean:"em gái"},
+  {hz:"和", py:"hé", pos:"lt.", mean:"và"},
+  {hz:"儿子", py:"érzi", pos:"dt.", mean:"con trai"},
+  {hz:"孩子", py:"háizi", pos:"dt.", mean:"con cái, trẻ em"},
+  {hz:"女儿", py:"nǚ'ér", pos:"dt.", mean:"con gái"},
+  {hz:"岁", py:"suì", pos:"lt.", mean:"tuổi"},
+  {hz:"他", py:"tā", pos:"đt.", mean:"anh ấy, nó (nam)"},
+  {hz:"今年", py:"jīnnián", pos:"dt.", mean:"năm nay"},
+  {hz:"多", py:"duō", pos:"đt.", mean:"bao nhiêu, cỡ nào (hỏi mức độ)"},
+  {hz:"大", py:"dà", pos:"tt.", mean:"lớn, nhiều tuổi"}
+];
+
+const DIALOGUES = {
+  d1:[
+    {who:"Lưu Minh (刘明)", hz:"一飞忙吗？", py:"Yīfēi máng ma?", vi:"Nhất Phi có bận không?"},
+    {who:"Vương Nhất Tuyết (王一雪)", hz:"她很忙。", py:"Tā hěn máng.", vi:"Chị ấy rất bận."},
+    {who:"刘明", hz:"她有多少个学生？", py:"Tā yǒu duōshao gè xuésheng?", vi:"Chị ấy có bao nhiêu học sinh?"},
+    {who:"王一雪", hz:"她有二十个学生。", py:"Tā yǒu èrshí gè xuésheng.", vi:"Chị ấy có hai mươi học sinh."}
+  ],
+  d2:[
+    {who:"Vương Nhất Tuyết (王一雪)", hz:"我有两个哥哥，你呢？", py:"Wǒ yǒu liǎng gè gēge, nǐ ne?", vi:"Tôi có hai anh trai, còn bạn thì sao?"},
+    {who:"Dương Đồng Lạc (杨同乐)", hz:"我没有哥哥。", py:"Wǒ méiyǒu gēge.", vi:"Tôi không có anh trai."},
+    {who:"王一雪", hz:"你家有几口人？", py:"Nǐ jiā yǒu jǐ kǒu rén?", vi:"Nhà bạn có mấy người?"},
+    {who:"杨同乐", hz:"我家有四口人，爸爸、妈妈、妹妹和我。", py:"Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.", vi:"Nhà tôi có bốn người: bố, mẹ, em gái và tôi."}
+  ],
+  d3:[
+    {who:"Dương Đồng Lạc (杨同乐)", hz:"这是您儿子吗？", py:"Zhè shì nín érzi ma?", vi:"Đây là con trai của chị à?"},
+    {who:"Vương Nhất Tuyết (王一雪)", hz:"是的。我有两个孩子，一个儿子，一个女儿。", py:"Shì de. Wǒ yǒu liǎng gè háizi, yí gè érzi, yí gè nǚ'ér.", vi:"Đúng vậy. Tôi có hai đứa con, một trai một gái."},
+    {who:"杨同乐", hz:"您儿子几岁？", py:"Nín érzi jǐ suì?", vi:"Con trai chị mấy tuổi?"},
+    {who:"王一雪", hz:"他今年五岁。", py:"Tā jīnnián wǔ suì.", vi:"Cháu năm nay 5 tuổi."},
+    {who:"杨同乐", hz:"您女儿多大？", py:"Nín nǚ'ér duō dà?", vi:"Con gái chị bao nhiêu tuổi?"},
+    {who:"王一雪", hz:"她今年十二。", py:"Tā jīnnián shí'èr.", vi:"Cháu năm nay 12 tuổi."}
+  ]
+};
+
+const HANZI_LIST = [
+  {char:"有", py:"yǒu", radical:"月(nguyệt/nhục)", strokes:6, mean:"có",
+   tip:"Phần trên là bàn tay (ナ), phần dưới là 月 (thịt) — tay cầm miếng thịt trong nhà, nghĩa là 'có' của cải."},
+  {char:"家", py:"jiā", radical:"宀(miên)", strokes:10, mean:"nhà, gia đình",
+   tip:"宀 (mái nhà) trên 豕 (con lợn) — thời xưa nuôi lợn dưới nhà sàn, biểu tượng một gia đình no đủ."},
+  {char:"几", py:"jǐ", radical:"几", strokes:2, mean:"mấy (hỏi số lượng nhỏ)",
+   tip:"Vốn là hình cái bàn nhỏ có chân — mượn âm để dùng làm từ hỏi số lượng ít, nhỏ hơn 10."},
+  {char:"口", py:"kǒu", radical:"口(khẩu)", strokes:3, mean:"miệng; lượng từ đếm người trong nhà",
+   tip:"Hình vẽ cái miệng đang há ra — mỗi 'miệng ăn' trong nhà được tính là một 口 (một nhân khẩu)."},
+  {char:"爸", py:"bà", radical:"父(phụ)", strokes:8, mean:"bố, cha",
+   tip:"父 (người cha, hình bàn tay cầm rìu — trụ cột gia đình) + 巴 (gợi âm 'ba')."},
+  {char:"妈", py:"mā", radical:"女(nữ)", strokes:6, mean:"mẹ",
+   tip:"女 (nữ) + 马 (mã, gợi âm 'ma') — ghép ý và âm để chỉ người mẹ."},
+  {char:"哥", py:"gē", radical:"口(khẩu)", strokes:10, mean:"anh trai",
+   tip:"Hai chữ 可 xếp chồng — lặp lại thể hiện cách gọi thân mật, quen thuộc dành cho anh trai."},
+  {char:"妹", py:"mèi", radical:"女(nữ)", strokes:8, mean:"em gái",
+   tip:"女 (nữ) + 未 (chưa, còn non) — người con gái còn nhỏ tuổi hơn mình, tức em gái."},
+  {char:"儿", py:"ér", radical:"儿(nhân đi)", strokes:2, mean:"con (trai); trẻ nhỏ",
+   tip:"Hình cách điệu đôi chân của một đứa trẻ đang chập chững — gốc nghĩa 'trẻ con'."},
+  {char:"岁", py:"suì", radical:"山(sơn)", strokes:6, mean:"tuổi",
+   tip:"Chữ dùng để đếm tuổi, gắn với chu kỳ một năm trôi qua — mỗi lần Trái Đất quay hết một vòng, thêm một 岁."},
+  {char:"大", py:"dà", radical:"大(đại)", strokes:3, mean:"to, lớn (tuổi)",
+   tip:"Hình một người dang rộng hai tay hai chân — biểu thị ý 'to lớn'; hỏi tuổi người lớn hơn dùng '多大'."}
+];
+
+/* ============ GAME HOÁ: XP / STREAK / BADGE / CONFETTI / ÂM THANH ============ */
+const GAME = { xp:0, streak:0, bestStreak:0, level:1, badges:{} };
+const BADGES = [
+  {id:'fill', label:'🎯 Điền từ', need:'fillDone'},
+  {id:'order', label:'🧩 Sắp câu', need:'orderDone'},
+  {id:'listen', label:'🎧 Nghe hiểu', need:'listenDone'},
+  {id:'streak5', label:'🔥 Chuỗi 5', need:'streak5'},
+  {id:'hanzi', label:'字 Viết chữ', need:'hanziDone'}
+];
+function renderBadges(){
+  const row = document.getElementById('badge-row');
+  row.innerHTML = BADGES.map(b=>`<span class="badge-pill ${GAME.badges[b.id]?'earned':''}">${b.label}</span>`).join('');
+}
+renderBadges();
+function unlockBadge(id){
+  if(!GAME.badges[id]){ GAME.badges[id]=true; renderBadges(); showToast('🏅 Mở khoá huy hiệu mới!','gold'); }
+}
+function updateXpBar(){
+  const needed = GAME.level*50;
+  document.getElementById('xp-label').textContent = GAME.xp+' XP';
+  document.getElementById('lvl-label').textContent = 'Cấp '+GAME.level+' '+(GAME.level<3?'🌱':GAME.level<6?'🌿':'🌳');
+  document.getElementById('xp-bar').style.width = Math.min(100,(GAME.xp % needed)/needed*100)+'%';
+  document.getElementById('streak-label').textContent = 'Chuỗi đúng: '+GAME.streak;
+}
+function gainXp(n, correct){
+  if(correct){
+    GAME.streak++; GAME.bestStreak = Math.max(GAME.bestStreak,GAME.streak);
+    if(GAME.streak>=5) unlockBadge('streak5');
+  } else {
+    GAME.streak = 0;
+  }
+  GAME.xp += n;
+  const needed = GAME.level*50;
+  if(GAME.xp >= GAME.level*50 + (GAME.level-1)*0){/*noop*/}
+  while(GAME.xp >= levelThreshold(GAME.level)){ GAME.level++; showToast('🎉 Lên cấp '+GAME.level+'!','gold'); }
+  updateXpBar();
+}
+function levelThreshold(lvl){ let t=0; for(let i=1;i<=lvl;i++) t+=i*50; return t; }
+function showToast(msg, kind){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show'+(kind==='gold'?' gold':'');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=>{ t.classList.remove('show'); }, 1800);
+}
+function floatPoints(x,y,text){
+  const el = document.createElement('div');
+  el.className = 'float-pts'; el.textContent = text;
+  el.style.left = x+'px'; el.style.top = y+'px';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1000);
+}
+/* âm thanh đơn giản bằng Web Audio API (không cần file mp3) */
+let audioCtx;
+function beep(freqs, dur){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    freqs.forEach((f,i)=>{
+      const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+      o.type='sine'; o.frequency.value=f;
+      o.connect(g); g.connect(audioCtx.destination);
+      const start = audioCtx.currentTime + i*dur;
+      g.gain.setValueAtTime(0.001,start);
+      g.gain.exponentialRampToValueAtTime(0.18,start+0.02);
+      g.gain.exponentialRampToValueAtTime(0.001,start+dur);
+      o.start(start); o.stop(start+dur);
+    });
+  }catch(e){}
+}
+function soundCorrect(){ beep([523,659,784],0.11); }
+function soundWrong(){ beep([220,180],0.14); }
+function soundLevelUp(){ beep([523,659,784,1046],0.13); }
+
+/* confetti canvas đơn giản */
+const cvs = document.getElementById('confetti-canvas');
+const ctx = cvs.getContext('2d');
+function resizeCanvas(){ cvs.width = innerWidth; cvs.height = innerHeight; }
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+const COLORS = ['#D98A80','#E0A85C','#E8B86B','#9B85C9','#4FAE82','#F0B8AE'];
+let confettiParticles = [];
+function fireConfetti(x,y,count){
+  count = count || 60;
+  x = x !== undefined ? x : cvs.width/2;
+  y = y !== undefined ? y : cvs.height/3;
+  for(let i=0;i<count;i++){
+    confettiParticles.push({
+      x, y,
+      vx:(Math.random()-0.5)*9,
+      vy:Math.random()*-9-3,
+      g:0.28,
+      size:4+Math.random()*4,
+      color:COLORS[Math.floor(Math.random()*COLORS.length)],
+      rot:Math.random()*360,
+      vr:(Math.random()-0.5)*12,
+      life:0, maxLife:70+Math.random()*30
+    });
+  }
+  if(!window._confettiLoop){ window._confettiLoop = true; requestAnimationFrame(confettiTick); }
+}
+function confettiTick(){
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  confettiParticles.forEach(p=>{
+    p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life++;
+    ctx.save();
+    ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = Math.max(0, 1 - p.life/p.maxLife);
+    ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+    ctx.restore();
+  });
+  confettiParticles = confettiParticles.filter(p=>p.life < p.maxLife);
+  if(confettiParticles.length){ requestAnimationFrame(confettiTick); }
+  else { window._confettiLoop = false; ctx.clearRect(0,0,cvs.width,cvs.height); }
+}
+function celebrate(el, points){
+  soundCorrect();
+  const rect = el.getBoundingClientRect();
+  fireConfetti(rect.left+rect.width/2, rect.top+rect.height/2, 45);
+  floatPoints(rect.left+rect.width/2, rect.top, '+'+points+' XP');
+  gainXp(points, true);
+}
+function fail(el){
+  soundWrong();
+  gainXp(0, false);
+}
+updateXpBar();
+
+/* ============ CHẾ ĐỘ TRÌNH CHIẾU ============ */
+function togglePresent(){
+  document.body.classList.toggle('present');
+  const on = document.body.classList.contains('present');
+  document.getElementById('present-toggle-desktop').classList.toggle('active', on);
+  document.getElementById('present-toggle-desktop').textContent = on ? '🖥 Đang trình chiếu' : '🖥 Chế độ trình chiếu';
+  try{ localStorage.setItem('tranghsk_present', on ? '1':'0'); }catch(e){}
+}
+document.getElementById('present-toggle-desktop').addEventListener('click', togglePresent);
+document.getElementById('present-toggle-mobile')?.addEventListener('click', togglePresent);
+try{
+  if(localStorage.getItem('tranghsk_present')==='1'){ togglePresent(); }
+}catch(e){}
+
+/* ============ TABS ============ */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============ PHÁT ÂM (Web Speech API) ============ */
+function speak(text){
+  if(!('speechSynthesis' in window)){ alert('Trình duyệt không hỗ trợ phát âm.'); return; }
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN';
+  u.rate = 0.85;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+/* ============ ẨN/HIỆN PHIÊN ÂM ============ */
+function toggleVocabPinyin(){
+  const table = document.querySelector('table.vocab');
+  const btn = document.getElementById('vocab-py-toggle');
+  const hidden = table.classList.toggle('hide-py');
+  btn.textContent = hidden ? '👁 Hiện phiên âm' : '🙈 Ẩn phiên âm';
+}
+function toggleDialoguePinyin(){
+  const container = document.getElementById('dialogue-container');
+  const btn = document.getElementById('dialogue-py-toggle');
+  const hidden = container.classList.toggle('hide-py');
+  btn.textContent = hidden ? '👁 Hiện phiên âm' : '🙈 Ẩn phiên âm';
+}
+
+/* ============ TAB TỪ VỰNG ============ */
+const vocabBody = document.getElementById('vocab-body');
+VOCAB.forEach(v=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><button class="btn-speak" onclick="speak('${v.hz}')">🔊</button></td>
+    <td class="hz hanzi">${v.hz}</td>
+    <td class="pinyin">${v.py}</td>
+    <td>${v.pos?`<span class="pos">${v.pos}</span>`:''}</td>
+    <td>${v.mean}</td>`;
+  vocabBody.appendChild(tr);
+});
+
+/* ============ TAB BÀI KHOÁ (HỘI THOẠI) ============ */
+const DLG_GROUPS = [
+  { title:"1. Hỏi số lượng học sinh", lines:[
+    {who:'m1', name:'Liú Míng',   hzName:'刘明',   py:'Yīfēi máng ma?', hz:'一飞忙吗？'},
+    {who:'f1', name:'Wáng Yīxuě', hzName:'王一雪', py:'Tā hěn máng.', hz:'她很忙。'},
+    {who:'m1', name:'Liú Míng',   hzName:'刘明',   py:'Tā yǒu duōshao gè xuésheng?', hz:'她有多少个学生？'},
+    {who:'f1', name:'Wáng Yīxuě', hzName:'王一雪', py:'Tā yǒu èrshí gè xuésheng.', hz:'她有二十个学生。'}
+  ]},
+  { title:"2. Hỏi thành viên trong nhà", lines:[
+    {who:'f2', name:'Wáng Yīxuě',  hzName:'王一雪', py:'Wǒ yǒu liǎng gè gēge, nǐ ne?', hz:'我有两个哥哥，你呢？'},
+    {who:'m2', name:'Yáng Tónglè', hzName:'杨同乐', py:'Wǒ méiyǒu gēge.', hz:'我没有哥哥。'},
+    {who:'f2', name:'王一雪',       hzName:'王一雪', py:'Nǐ jiā yǒu jǐ kǒu rén?', hz:'你家有几口人？'},
+    {who:'m2', name:'杨同乐',       hzName:'杨同乐', py:'Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.', hz:'我家有四口人，爸爸、妈妈、妹妹和我。'}
+  ]},
+  { title:"3. Hỏi tuổi con cái", lines:[
+    {who:'m3', name:'Yáng Tónglè', hzName:'杨同乐', py:'Zhè shì nín érzi ma?', hz:'这是您儿子吗？'},
+    {who:'f3', name:'Wáng Yīxuě',  hzName:'王一雪', py:'Shì de. Wǒ yǒu liǎng gè háizi, yí gè érzi, yí gè nǚ\'ér.', hz:'是的。我有两个孩子，一个儿子，一个女儿。'},
+    {who:'m3', name:'杨同乐',       hzName:'杨同乐', py:'Nín érzi jǐ suì?', hz:'您儿子几岁？'},
+    {who:'f3', name:'王一雪',       hzName:'王一雪', py:'Tā jīnnián wǔ suì.', hz:'他今年五岁。'},
+    {who:'m3', name:'杨同乐',       hzName:'杨同乐', py:'Nín nǚ\'ér duō dà?', hz:'您女儿多大？'},
+    {who:'f3', name:'王一雪',       hzName:'王一雪', py:'Tā jīnnián shí\'èr.', hz:'她今年十二。'}
+  ]}
+];
+const DLG_AVATAR = {m1:'🧑', f1:'👩', f2:'👩‍🦰', m2:'🧑‍🦱', f3:'🧑‍🦱', m3:'👩‍🦰'};
+
+const dialogueContainer = document.getElementById('dialogue-container');
+DLG_GROUPS.forEach((grp, gi)=>{
+  const group = document.createElement('div');
+  group.className = 'dialogue-group';
+  const linesHz = grp.lines.map(l=>l.hz);
+  group.innerHTML = `
+    <div class="dialogue-head">
+      <span class="dialogue-title">${grp.title}</span>
+      <button class="btn secondary btn-play-all" onclick="playDialogue(${gi}, this)">▶ Nghe cả đoạn</button>
+    </div>
+    <div class="dlg-lines" id="dlg-lines-${gi}"></div>`;
+  dialogueContainer.appendChild(group);
+  const linesEl = group.querySelector(`#dlg-lines-${gi}`);
+  grp.lines.forEach(l=>{
+    const row = document.createElement('div');
+    row.className = 'dlg-line';
+    row.innerHTML = `
+      <div class="dlg-avatar-wrap">
+        <div class="dlg-avatar">${DLG_AVATAR[l.who]}</div>
+        <div class="dlg-who">${l.name}<br><span class="hz-mini hanzi">${l.hzName}</span></div>
+      </div>
+      <div class="dlg-bubble">
+        <div class="dlg-py">${l.py}</div>
+        <div class="dlg-hz hanzi">${l.hz}</div>
+        <button class="btn-speak" onclick="speak('${l.hz.replace(/'/g,"\\'")}')">🔊</button>
+      </div>`;
+    linesEl.appendChild(row);
+  });
+});
+
+function playDialogue(idx, btn){
+  if(!('speechSynthesis' in window)){ alert('Trình duyệt không hỗ trợ phát âm.'); return; }
+  const lines = DLG_GROUPS[idx].lines.map(l=>l.hz);
+  speechSynthesis.cancel();
+  btn.disabled = true;
+  const original = btn.textContent;
+  btn.textContent = '⏸ Đang phát...';
+  let i = 0;
+  function next(){
+    if(i >= lines.length){ btn.disabled = false; btn.textContent = original; return; }
+    const u = new SpeechSynthesisUtterance(lines[i]);
+    u.lang = 'zh-CN'; u.rate = 0.85;
+    u.onend = ()=>{ i++; setTimeout(next, 350); };
+    u.onerror = ()=>{ btn.disabled = false; btn.textContent = original; };
+    speechSynthesis.speak(u);
+  }
+  next();
+}
+
+/* ============ TAB NGỮ PHÁP ============ */
+const GM_EXAMPLES = {
+  gm1:[
+    {hz:"她有二十个学生。", py:"Tā yǒu èrshí gè xuésheng.", vi:"Chị ấy có hai mươi học sinh."},
+    {hz:"她有一个姐姐。", py:"Tā yǒu yí gè jiějie.", vi:"Cô ấy có một chị gái."},
+    {hz:"我没/没有姐姐。", py:"Wǒ méi/méiyǒu jiějie.", vi:"Tôi không có chị gái."}
+  ],
+  gm2:[
+    {hz:"十二", py:"shí'èr", vi:"12 (dùng 二 vì là số đếm/số thứ tự)"},
+    {hz:"两个人", py:"liǎng gè rén", vi:"hai người (dùng 两 vì đứng trước lượng từ 个)"},
+    {hz:"两口人 / 两本书", py:"liǎng kǒu rén / liǎng běn shū", vi:"hai người (nhân khẩu) / hai quyển sách"}
+  ],
+  gm3:[
+    {hz:"我有两个哥哥，你呢？", py:"Wǒ yǒu liǎng gè gēge, nǐ ne?", vi:"Tôi có hai anh trai, còn bạn thì sao?"},
+    {hz:"我叫白家月，你呢？", py:"Wǒ jiào Bái Jiāyuè, nǐ ne?", vi:"Tôi tên Bạch Gia Nguyệt, còn bạn?"},
+    {hz:"我是中国人，你呢？", py:"Wǒ shì Zhōngguó rén, nǐ ne?", vi:"Tôi là người Trung Quốc, còn bạn?"}
+  ],
+  gm4:[
+    {hz:"四口", py:"sì kǒu", vi:"bốn (nhân khẩu) — chỉ có Số+Lượng, chưa nói rõ danh từ"},
+    {hz:"四口人", py:"sì kǒu rén", vi:"bốn người (trong nhà)"},
+    {hz:"两个", py:"liǎng gè", vi:"hai (cái/người) — Số+Lượng"},
+    {hz:"两个学生", py:"liǎng gè xuésheng", vi:"hai học sinh — Số+Lượng+Danh"}
+  ]
+};
+function renderGM(id, list){
+  document.getElementById(id).innerHTML = list.map(x=>`
+    <div class="dlg-line" style="margin-bottom:10px;">
+      <button class="btn-speak" style="position:static;flex-shrink:0;margin-top:2px;" onclick="speak('${x.hz.replace(/'/g,"\\'")}')">🔊</button>
+      <div>
+        <div class="dlg-py" style="margin-bottom:0;">${x.py}</div>
+        <div class="hanzi" style="font-size:1.25rem;font-weight:700;color:var(--ink);">${x.hz}</div>
+        <div style="color:var(--gray);font-size:.85rem;">${x.vi}</div>
+      </div>
+    </div>`).join('');
+}
+renderGM('gm-1', GM_EXAMPLES.gm1);
+renderGM('gm-2', GM_EXAMPLES.gm2);
+renderGM('gm-3', GM_EXAMPLES.gm3);
+renderGM('gm-4', GM_EXAMPLES.gm4);
+
+const GM_PRACTICE = [
+  {q:"王一飞老师 ___ 二十个学生。", a:"有", vi:"Cô giáo Vương Nhất Phi có hai mươi học sinh."},
+  {q:"杨同乐家 ___ 四口人。", a:"有", vi:"Nhà Dương Đồng Lạc có bốn người."},
+  {q:"我有两个孩子，你 ___？", a:"呢", vi:"Tôi có hai đứa con, còn bạn thì sao?"},
+  {q:"我 ___ 孩子。", a:"没", vi:"Tôi không có con."},
+  {q:"您女儿今年多 ___？", a:"大", vi:"Con gái chị năm nay bao nhiêu tuổi?"}
+];
+function renderGmPractice(){
+  document.getElementById('gm-practice').innerHTML = GM_PRACTICE.map((p,i)=>`
+    <div class="fill-line hanzi">
+      ${i+1}. ${p.q.replace('___', `<input type="text" id="gmp-${i}" style="width:56px;text-align:center;border:2px solid var(--red-light);border-radius:8px;padding:4px 6px;font-family:'Noto Sans SC';font-size:1.05rem;">`)}
+      <button class="btn-mini yes" style="margin-left:8px;" onclick="checkGmp(${i})">Kiểm tra</button>
+      <span id="gmp-result-${i}"></span>
+      <div style="color:var(--gray);font-size:.8rem;font-family:'Be Vietnam Pro';">${p.vi}</div>
+    </div>`).join('');
+}
+function checkGmp(i){
+  const inp = document.getElementById('gmp-'+i);
+  const res = document.getElementById('gmp-result-'+i);
+  if(inp.value.trim()===GM_PRACTICE[i].a){ res.innerHTML=' <span class="result-ok">✔ Đúng!</span>'; celebrate(inp,1); }
+  else { res.innerHTML=' <span class="result-bad">✘ Đáp án đúng: '+GM_PRACTICE[i].a+'</span>'; fail(inp); }
+}
+renderGmPractice();
+
+/* ============ TAB FLASHCARD ============ */
+let fcIndex = 0;
+const fcKnownSet = new Set();
+const fcCard = document.getElementById('flashcard');
+function renderFC(){
+  const v = VOCAB[fcIndex];
+  document.getElementById('fc-hz').textContent = v.hz;
+  document.getElementById('fc-pinyin').textContent = v.py;
+  document.getElementById('fc-mean').textContent = v.mean;
+  document.getElementById('fc-progress').textContent = (fcIndex+1)+' / '+VOCAB.length;
+  fcCard.classList.remove('flipped');
+}
+function flipCard(){ fcCard.classList.toggle('flipped'); }
+function fcNext(){ fcIndex = (fcIndex+1)%VOCAB.length; renderFC(); }
+function fcPrev(){ fcIndex = (fcIndex-1+VOCAB.length)%VOCAB.length; renderFC(); }
+function fcKnown(yes){
+  if(yes && !fcKnownSet.has(fcIndex)){
+    fcKnownSet.add(fcIndex);
+    document.getElementById('fc-known-count').textContent = fcKnownSet.size;
+    celebrate(fcCard, 2);
+    if(fcKnownSet.size === VOCAB.length){ showToast('⭐ Thuộc hết từ vựng Bài 4!','gold'); fireConfetti(); }
+  } else if(!yes){
+    fcKnownSet.delete(fcIndex);
+    document.getElementById('fc-known-count').textContent = fcKnownSet.size;
+  }
+  fcNext();
+}
+fcCard.addEventListener('click', flipCard);
+renderFC();
+
+/* ============ TAB LUYỆN VIẾT CÂU ============ */
+let scoreTotal = 0, scoreMax = 0;
+function addScore(n){ scoreTotal += n; document.getElementById('total-score').textContent = scoreTotal; }
+function addMax(n){ scoreMax += n; document.getElementById('total-max').textContent = scoreMax; }
+
+/* --- Dạng 3: điền từ (dropdown) --- */
+const FILL_DATA = [
+  {before:"王一飞老师有", blank:"二十", options:["二十","没","口"], after:"个学生。", vi:"(Cô giáo Vương Nhất Phi có hai mươi học sinh.)"},
+  {before:"杨同乐家有四", blank:"口", options:["口","呢","大"], after:"人。", vi:"(Nhà Dương Đồng Lạc có bốn người.)"},
+  {before:"王一雪：我有两个孩子，你", blank:"呢", options:["呢","的","是"], after:"？", vi:"(Tôi có hai đứa con, còn bạn thì sao?)"},
+  {before:"杨同乐：我", blank:"没", options:["没","有","几"], after:"孩子。", vi:"(Tôi không có con.)"},
+  {before:"杨同乐：您女儿今年多", blank:"大", options:["大","多少","几"], after:"？", vi:"(Con gái chị năm nay bao nhiêu tuổi?)"},
+  {before:"你家有", blank:"几", options:["几","个","多"], after:"口人？", vi:"(Nhà bạn có mấy người?)"},
+  {before:"我", blank:"有", options:["有","是","呢"], after:"两个哥哥。", vi:"(Tôi có hai anh trai.)"}
+];
+const fillContainer = document.getElementById('fill-container');
+FILL_DATA.forEach((f,i)=>{
+  const shuffled = [...f.options].sort(()=>Math.random()-0.5);
+  const div = document.createElement('div');
+  div.className = 'fill-line';
+  div.innerHTML = `${i+1}. ${f.before}
+    <select class="blank hanzi" data-answer="${f.blank}" data-idx="${i}">
+      <option value="">--chọn--</option>
+      ${shuffled.map(o=>`<option value="${o}">${o}</option>`).join('')}
+    </select>
+    ${f.after} <span style="color:var(--gray);font-size:.82rem;">${f.vi}</span>`;
+  fillContainer.appendChild(div);
+});
+addMax(FILL_DATA.length);
+let fillScored = false;
+function checkFill(){
+  let ok=0;
+  document.querySelectorAll('#fill-container select').forEach(sel=>{
+    sel.classList.remove('ok','bad');
+    if(sel.value === sel.dataset.answer){ ok++; sel.classList.add('ok'); celebrate(sel,3); }
+    else { sel.classList.add('bad'); fail(sel); }
+  });
+  document.getElementById('fill-result').innerHTML =
+    ok===FILL_DATA.length ? `<span class="result-ok">Đúng ${ok}/${FILL_DATA.length} 🎉</span>`
+                           : `<span class="result-bad">Đúng ${ok}/${FILL_DATA.length}</span>`;
+  if(!fillScored){ addScore(ok); fillScored = true; }
+  if(ok===FILL_DATA.length){ unlockBadge('fill'); fireConfetti(); showToast('🎯 Hoàn thành Dạng 3 xuất sắc!'); }
+}
+
+/* --- Dạng 4: sắp xếp từ thành câu --- */
+const ORDER_DATA = [
+  {words:["她","有","二十个","学生","。"], answer:"她有二十个学生。", vi:"Chị ấy có hai mươi học sinh."},
+  {words:["我","家","有","四口人","。"], answer:"我家有四口人。", vi:"Nhà tôi có bốn người."},
+  {words:["你","家","有","几口人","？"], answer:"你家有几口人？", vi:"Nhà bạn có mấy người?"},
+  {words:["我","有","两个","孩子","。"], answer:"我有两个孩子。", vi:"Tôi có hai đứa con."}
+];
+const orderContainer = document.getElementById('order-container');
+ORDER_DATA.forEach((o,idx)=>{
+  const wrap = document.createElement('div');
+  wrap.style.marginBottom = '18px';
+  const shuffledWords = [...o.words].sort(()=>Math.random()-0.5);
+  wrap.innerHTML = `
+    <div style="font-size:.85rem;color:var(--gray);margin-bottom:4px;">Câu ${idx+1} · ${o.vi}</div>
+    <div class="order-zone hanzi" id="zone-${idx}"></div>
+    <div class="order-bank hanzi" id="bank-${idx}"></div>
+    <button class="btn secondary" onclick="resetOrder(${idx})">↺ Làm lại</button>
+    <button class="btn btn-check" onclick="checkOrder(${idx})">Kiểm tra</button>
+    <span id="order-result-${idx}"></span>`;
+  orderContainer.appendChild(wrap);
+  window['orderWords_'+idx] = shuffledWords;
+  window['orderAns_'+idx] = o.answer;
+  renderOrder(idx);
+});
+addMax(ORDER_DATA.length);
+function renderOrder(idx){
+  const bank = document.getElementById('bank-'+idx);
+  const zone = document.getElementById('zone-'+idx);
+  bank.innerHTML=''; zone.innerHTML='';
+  window['orderWords_'+idx].forEach(w=>{
+    const chip = document.createElement('span');
+    chip.className='order-item';
+    chip.textContent=w;
+    chip.onclick=()=>{ zone.appendChild(chip); chip.classList.add('chosen'); chip.onclick=()=>{bank.appendChild(chip); chip.classList.remove('chosen');chip.onclick=chip.onclick;}; moveToBank(chip,bank,zone);};
+    bank.appendChild(chip);
+  });
+}
+function moveToBank(chip,bank,zone){
+  chip.onclick = ()=>{ bank.appendChild(chip); chip.classList.remove('chosen'); chip.onclick=()=>{ zone.appendChild(chip); chip.classList.add('chosen'); moveToBank(chip,bank,zone); }; };
+}
+function resetOrder(idx){ renderOrder(idx); document.getElementById('order-result-'+idx).innerHTML=''; document.getElementById('zone-'+idx).classList.remove('ok','bad'); }
+let orderCompleted = new Set();
+function checkOrder(idx){
+  const zone = document.getElementById('zone-'+idx);
+  const built = Array.from(zone.children).map(c=>c.textContent).join('');
+  const res = document.getElementById('order-result-'+idx);
+  zone.classList.remove('ok','bad');
+  if(built === window['orderAns_'+idx]){
+    res.innerHTML = `<span class="result-ok">✔ Chính xác! ${built}</span>`;
+    zone.classList.add('ok');
+    if(!orderCompleted.has(idx)){ orderCompleted.add(idx); celebrate(zone,4); }
+    if(orderCompleted.size===ORDER_DATA.length){ unlockBadge('order'); showToast('🧩 Sắp câu hoàn hảo!'); }
+  } else {
+    res.innerHTML = `<span class="result-bad">✘ Chưa đúng. Đáp án: ${window['orderAns_'+idx]}</span>`;
+    zone.classList.add('bad'); fail(zone);
+  }
+}
+
+/* --- tiện ích: xáo trộn mảng --- */
+function shuffleArr(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* --- Dạng 1: nghe chọn từ vựng nghe được --- */
+const LISTEN_VOCAB_DATA = [
+  VOCAB.find(v=>v.hz==="有"),
+  VOCAB.find(v=>v.hz==="哥哥"),
+  VOCAB.find(v=>v.hz==="家"),
+  VOCAB.find(v=>v.hz==="爸爸"),
+  VOCAB.find(v=>v.hz==="女儿"),
+  VOCAB.find(v=>v.hz==="岁")
+];
+const listenVocabContainer = document.getElementById('listen-vocab-container');
+let listenVocabScored = 0;
+LISTEN_VOCAB_DATA.forEach((item,idx)=>{
+  const distractors = shuffleArr(VOCAB.filter(v=>v.hz!==item.hz)).slice(0,3);
+  const options = shuffleArr([item, ...distractors]);
+  const div = document.createElement('div');
+  div.className = 'listen-item';
+  div.innerHTML = `
+    <div class="listen-head">
+      <span class="listen-num">Câu ${idx+1}.</span>
+      <button class="btn-listen" onclick="speak('${item.hz}')">🔊</button>
+    </div>
+    <div class="mc-options" id="lv-opts-${idx}">
+      ${options.map(o=>`<button class="mc-opt hanzi" onclick="checkListenVocab(this,${idx},'${o.hz}')">${o.hz}</button>`).join('')}
+    </div>`;
+  listenVocabContainer.appendChild(div);
+});
+addMax(LISTEN_VOCAB_DATA.length);
+function checkListenVocab(btn, idx, chosen){
+  const correct = LISTEN_VOCAB_DATA[idx].hz;
+  const opts = document.querySelectorAll('#lv-opts-'+idx+' .mc-opt');
+  opts.forEach(o=>{ o.disabled = true; if(o.textContent===correct) o.classList.add('ok'); else o.classList.add('dim'); });
+  if(chosen===correct){
+    btn.classList.remove('dim'); addScore(1); celebrate(btn,1);
+  } else {
+    btn.classList.remove('dim'); btn.classList.add('bad'); fail(btn);
+  }
+  listenVocabScored++;
+  if(listenVocabScored===LISTEN_VOCAB_DATA.length){ checkListenDone(); }
+}
+
+/* --- Dạng 2: nghe chọn câu nghe được --- */
+const ALL_SENTENCES = [].concat(DIALOGUES.d1, DIALOGUES.d2, DIALOGUES.d3);
+const LISTEN_SENTENCE_DATA = [
+  ALL_SENTENCES.find(s=>s.hz==="她有二十个学生。"),
+  ALL_SENTENCES.find(s=>s.hz==="我有两个哥哥，你呢？"),
+  ALL_SENTENCES.find(s=>s.hz==="你家有几口人？"),
+  ALL_SENTENCES.find(s=>s.hz==="您儿子几岁？"),
+  ALL_SENTENCES.find(s=>s.hz==="他今年五岁。")
+];
+const listenSentenceContainer = document.getElementById('listen-sentence-container');
+let listenSentenceScored = 0;
+LISTEN_SENTENCE_DATA.forEach((item,idx)=>{
+  const distractors = shuffleArr(ALL_SENTENCES.filter(s=>s.hz!==item.hz)).slice(0,3);
+  const options = shuffleArr([item, ...distractors]);
+  const div = document.createElement('div');
+  div.className = 'listen-item';
+  div.innerHTML = `
+    <div class="listen-head">
+      <span class="listen-num">Câu ${idx+1}.</span>
+      <button class="btn-listen" onclick="speak('${item.hz}')">🔊</button>
+    </div>
+    <div class="mc-options" id="ls-opts-${idx}">
+      ${options.map(o=>`<button class="mc-opt hanzi" style="font-size:1.05rem;" onclick="checkListenSentence(this,${idx},'${o.hz}')">${o.hz}</button>`).join('')}
+    </div>`;
+  listenSentenceContainer.appendChild(div);
+});
+addMax(LISTEN_SENTENCE_DATA.length);
+function checkListenSentence(btn, idx, chosen){
+  const correct = LISTEN_SENTENCE_DATA[idx].hz;
+  const opts = document.querySelectorAll('#ls-opts-'+idx+' .mc-opt');
+  opts.forEach(o=>{ o.disabled = true; if(o.textContent===correct) o.classList.add('ok'); else o.classList.add('dim'); });
+  if(chosen===correct){
+    btn.classList.remove('dim'); addScore(1); celebrate(btn,1);
+  } else {
+    btn.classList.remove('dim'); btn.classList.add('bad'); fail(btn);
+  }
+  listenSentenceScored++;
+  if(listenSentenceScored===LISTEN_SENTENCE_DATA.length){ checkListenDone(); }
+}
+
+function checkListenDone(){
+  if(listenVocabScored===LISTEN_VOCAB_DATA.length && listenSentenceScored===LISTEN_SENTENCE_DATA.length){
+    unlockBadge('listen'); showToast('🎧 Hoàn thành bài nghe!');
+  }
+}
+
+/* ============ TAB CHỮ HÁN (Hanzi Writer) ============ */
+let hanziWriterInstance = null;
+let currentHanziIdx = 0;
+
+const hzPicker = document.getElementById('hz-picker');
+HANZI_LIST.forEach((h,idx)=>{
+  const chip = document.createElement('div');
+  chip.className = 'hz-chip hanzi' + (idx===0?' active':'');
+  chip.textContent = h.char;
+  chip.onclick = ()=>selectHanzi(idx);
+  hzPicker.appendChild(chip);
+});
+
+function loadHanziWriterScript(cb){
+  if(window.HanziWriter){ cb(); return; }
+  const sources = [
+    'https://cdn.jsdelivr.net/npm/hanzi-writer@3/dist/hanzi-writer.min.js',
+    'https://unpkg.com/hanzi-writer@3/dist/hanzi-writer.min.js'
+  ];
+  let i=0;
+  function tryLoad(){
+    if(i>=sources.length){ document.getElementById('hanzi-target').innerHTML = '<div class="locked-msg">Không tải được thư viện Hanzi Writer (kiểm tra kết nối mạng).</div>'; return; }
+    const s = document.createElement('script');
+    s.src = sources[i];
+    s.onload = cb;
+    s.onerror = ()=>{ i++; tryLoad(); };
+    document.head.appendChild(s);
+  }
+  tryLoad();
+}
+
+function selectHanzi(idx){
+  currentHanziIdx = idx;
+  document.querySelectorAll('.hz-chip').forEach((c,i)=>c.classList.toggle('active', i===idx));
+  const h = HANZI_LIST[idx];
+  document.getElementById('hz-pinyin').textContent = h.py;
+  document.getElementById('hz-radical').textContent = h.radical;
+  document.getElementById('hz-strokes').textContent = h.strokes;
+  document.getElementById('hz-mean').textContent = h.mean;
+  document.getElementById('hz-tip').textContent = h.tip;
+  drawHanzi(h.char);
+}
+
+function drawHanzi(char){
+  const target = document.getElementById('hanzi-target');
+  target.innerHTML = '';
+  loadHanziWriterScript(()=>{
+    try{
+      hanziWriterInstance = HanziWriter.create('hanzi-target', char, {
+        width: 260, height: 260,
+        padding: 12,
+        strokeColor: '#B35D52',
+        radicalColor: '#D98A80',
+        showOutline: true,
+        strokeAnimationSpeed: 1,
+        delayBetweenStrokes: 200
+      });
+    }catch(e){
+      target.innerHTML = '<div class="locked-msg">Không tải được nét chữ "'+char+'".</div>';
+    }
+  });
+}
+function hzAnimate(){ if(hanziWriterInstance) hanziWriterInstance.animateCharacter(); }
+function hzQuiz(){
+  if(!hanziWriterInstance) return;
+  hanziWriterInstance.quiz({
+    onComplete: (summary)=>{
+      const target = document.getElementById('hanzi-target');
+      celebrate(target, 5);
+      unlockBadge('hanzi');
+      showToast('字 Viết đúng chữ '+HANZI_LIST[currentHanziIdx].char+'!','gold');
+    }
+  });
+}
+function hzOutline(){
+  if(!hanziWriterInstance) return;
+  hanziWriterInstance.hideCharacter();
+  hanziWriterInstance.showOutline();
+}
+// khởi tạo chữ đầu tiên
+selectHanzi(0);
+</script>
+
+
+</body></html>
